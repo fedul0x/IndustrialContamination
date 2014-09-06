@@ -82,7 +82,7 @@ public class DataSheetInput extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
         jPanel1.add(jLabel2, gridBagConstraints);
 
-        jLabel3.setText("Классификация по ФККО");
+        jLabel3.setText("Наименование по ФККО");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 4;
