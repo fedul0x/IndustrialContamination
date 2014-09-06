@@ -141,11 +141,7 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jitemLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jitemLoginActionPerformed
-        // TODO add your handling code here:
-//        LoginFrame lf = new LoginFrame();
-//        lf.setVisible(true);
-        String[] args = {};
-        LoginFrame.main(args);
+        LoginFrame.main(this);
         
     }//GEN-LAST:event_jitemLoginActionPerformed
 
