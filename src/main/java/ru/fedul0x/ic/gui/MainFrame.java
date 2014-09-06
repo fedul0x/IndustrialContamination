@@ -15,6 +15,7 @@
  */
 package ru.fedul0x.ic.gui;
 
+import java.awt.CardLayout;
 import ru.fedul0x.ic.dataaccess.dataobject.ContaminationByFederalClassification;
 import ru.fedul0x.ic.view.component.model.HibernateRowTableModel;
 
@@ -40,6 +41,9 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtablFKKO = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -55,7 +59,15 @@ public class MainFrame extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
+        getContentPane().setLayout(new java.awt.CardLayout());
+
+        jPanel1.setLayout(new java.awt.CardLayout());
+
+        jButton1.setText("jButton1");
+        jPanel1.add(jButton1, "card4");
+
+        jLabel1.setText("jLabel1");
+        jPanel1.add(jLabel1, "card5");
 
         jtablFKKO.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -70,9 +82,11 @@ public class MainFrame extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jtablFKKO);
 
-        getContentPane().add(jScrollPane1);
+        jPanel1.add(jScrollPane1, "card2");
 
-        jmenuLogin.setText("Вход");
+        getContentPane().add(jPanel1, "card3");
+
+        jmenuLogin.setText("Начало");
 
         jMenuItem1.setText("Настройки БД");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -112,6 +126,11 @@ public class MainFrame extends javax.swing.JFrame {
         jmenuAbout.setText("О программе");
 
         jMenuItem2.setText("jMenuItem2");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jmenuAbout.add(jMenuItem2);
 
         jMenuBar1.add(jmenuAbout);
@@ -123,6 +142,11 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jitemLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jitemLoginActionPerformed
         // TODO add your handling code here:
+//        LoginFrame lf = new LoginFrame();
+//        lf.setVisible(true);
+        String[] args = {};
+        LoginFrame.main(args);
+        
     }//GEN-LAST:event_jitemLoginActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -135,6 +159,13 @@ public class MainFrame extends javax.swing.JFrame {
         jtablFKKO.setModel(hrtm);
 // TODO add your handling code here:
     }//GEN-LAST:event_jitemFKKOActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+//        (getContentPane().getLayout()).show(jButton1, "sfd");
+//        ((CardLayout)getContentPane().getLayout()).next(this);
+//        ((CardLayout)jPanel1.getLayout()).next(this);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -172,9 +203,12 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
