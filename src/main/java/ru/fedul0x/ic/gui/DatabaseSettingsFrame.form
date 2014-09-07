@@ -39,9 +39,6 @@
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[320, 280]"/>
     </Property>
-    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[320, 280]"/>
-    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -135,7 +132,7 @@
           <Properties>
             <Property name="horizontalAlignment" type="int" value="4"/>
             <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="jtxtDatabaseLogin"/>
+              <ComponentRef name="jtxtDatabaseUsername"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#x41f;&#x430;&#x440;&#x43e;&#x43b;&#x44c; &#x411;&#x414;"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -154,7 +151,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JTextField" name="jtxtDatabaseLogin">
+        <Component class="javax.swing.JTextField" name="jtxtDatabaseUsername">
           <Properties>
             <Property name="text" type="java.lang.String" value="postgres"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -228,7 +225,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JTextField" name="jtxtDatabaseServerAddress">
+        <Component class="javax.swing.JTextField" name="jtxtDatabaseHost">
           <Properties>
             <Property name="text" type="java.lang.String" value="192.168.0.101"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -239,7 +236,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtxtDatabaseServerAddressActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtxtDatabaseHostActionPerformed"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -251,7 +248,7 @@
           <Properties>
             <Property name="horizontalAlignment" type="int" value="4"/>
             <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-              <ComponentRef name="jtxtDatabaseLogin"/>
+              <ComponentRef name="jtxtDatabaseUsername"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#x41f;&#x43e;&#x440;&#x442; &#x441;&#x435;&#x440;&#x432;&#x435;&#x440;&#x430; &#x411;&#x414;"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -270,7 +267,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JTextField" name="jtxtDatabaseServerPort">
+        <Component class="javax.swing.JTextField" name="jtxtDatabasePort">
           <Properties>
             <Property name="text" type="java.lang.String" value="5432"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -864,11 +861,11 @@
             <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component, java.lang.Object"/>
           </StatementProvider>
           <Parameters>
-            <CodeExpression id="42_jtxtDatabaseLogin">
-              <CodeVariable name="jtxtDatabaseLogin" type="8194" declaredType="javax.swing.JTextField"/>
+            <CodeExpression id="42_jtxtDatabaseUsername">
+              <CodeVariable name="jtxtDatabaseUsername" type="8194" declaredType="javax.swing.JTextField"/>
               <ExpressionOrigin>
                 <ExpressionProvider type="ComponentRef">
-                  <ComponentRef name="jtxtDatabaseLogin"/>
+                  <ComponentRef name="jtxtDatabaseUsername"/>
                 </ExpressionProvider>
               </ExpressionOrigin>
             </CodeExpression>
@@ -1162,11 +1159,11 @@
             <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component, java.lang.Object"/>
           </StatementProvider>
           <Parameters>
-            <CodeExpression id="64_jtxtDatabaseServerAddress">
-              <CodeVariable name="jtxtDatabaseServerAddress" type="8194" declaredType="javax.swing.JTextField"/>
+            <CodeExpression id="64_jtxtDatabaseHost">
+              <CodeVariable name="jtxtDatabaseHost" type="8194" declaredType="javax.swing.JTextField"/>
               <ExpressionOrigin>
                 <ExpressionProvider type="ComponentRef">
-                  <ComponentRef name="jtxtDatabaseServerAddress"/>
+                  <ComponentRef name="jtxtDatabaseHost"/>
                 </ExpressionProvider>
               </ExpressionOrigin>
             </CodeExpression>
@@ -1339,11 +1336,11 @@
             <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component, java.lang.Object"/>
           </StatementProvider>
           <Parameters>
-            <CodeExpression id="77_jtxtDatabaseServerPort">
-              <CodeVariable name="jtxtDatabaseServerPort" type="8194" declaredType="javax.swing.JTextField"/>
+            <CodeExpression id="77_jtxtDatabasePort">
+              <CodeVariable name="jtxtDatabasePort" type="8194" declaredType="javax.swing.JTextField"/>
               <ExpressionOrigin>
                 <ExpressionProvider type="ComponentRef">
-                  <ComponentRef name="jtxtDatabaseServerPort"/>
+                  <ComponentRef name="jtxtDatabasePort"/>
                 </ExpressionProvider>
               </ExpressionOrigin>
             </CodeExpression>

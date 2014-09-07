@@ -16,6 +16,7 @@
 
 package ru.fedul0x.ic.gui;
 
+import ru.fedul0x.ic.SystemSettings;
 import ru.fedul0x.ic.dataaccess.HibernateUtil;
 
 /**
@@ -49,13 +50,13 @@ public class DatabaseSettingsFrame extends javax.swing.JFrame {
         jbtnSaveConnectionSettings = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jtxtDatabaseLogin = new javax.swing.JTextField();
+        jtxtDatabaseUsername = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jlblMessage = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jtxtDatabaseServerAddress = new javax.swing.JTextField();
+        jtxtDatabaseHost = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jtxtDatabaseServerPort = new javax.swing.JTextField();
+        jtxtDatabasePort = new javax.swing.JTextField();
         jpasDatabasePassword = new javax.swing.JPasswordField();
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -78,7 +79,6 @@ public class DatabaseSettingsFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Настройки соединения с БД");
         setMinimumSize(new java.awt.Dimension(320, 280));
-        setPreferredSize(new java.awt.Dimension(320, 280));
 
         java.awt.GridBagLayout jPanel6Layout = new java.awt.GridBagLayout();
         jPanel6Layout.columnWidths = new int[] {0, 8, 0, 8, 0, 8, 0, 8, 0};
@@ -140,7 +140,7 @@ public class DatabaseSettingsFrame extends javax.swing.JFrame {
         jPanel6.add(jLabel1, gridBagConstraints);
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setLabelFor(jtxtDatabaseLogin);
+        jLabel3.setLabelFor(jtxtDatabaseUsername);
         jLabel3.setText("Пароль БД");
         jLabel3.setMaximumSize(new java.awt.Dimension(2147483647, 20));
         jLabel3.setMinimumSize(new java.awt.Dimension(100, 20));
@@ -151,9 +151,9 @@ public class DatabaseSettingsFrame extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         jPanel6.add(jLabel3, gridBagConstraints);
 
-        jtxtDatabaseLogin.setText("postgres");
-        jtxtDatabaseLogin.setMaximumSize(new java.awt.Dimension(2147483647, 20));
-        jtxtDatabaseLogin.setMinimumSize(new java.awt.Dimension(59, 20));
+        jtxtDatabaseUsername.setText("postgres");
+        jtxtDatabaseUsername.setMaximumSize(new java.awt.Dimension(2147483647, 20));
+        jtxtDatabaseUsername.setMinimumSize(new java.awt.Dimension(59, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 6;
@@ -162,7 +162,7 @@ public class DatabaseSettingsFrame extends javax.swing.JFrame {
         gridBagConstraints.ipady = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
-        jPanel6.add(jtxtDatabaseLogin, gridBagConstraints);
+        jPanel6.add(jtxtDatabaseUsername, gridBagConstraints);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -205,12 +205,12 @@ public class DatabaseSettingsFrame extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         jPanel6.add(jLabel4, gridBagConstraints);
 
-        jtxtDatabaseServerAddress.setText("192.168.0.101");
-        jtxtDatabaseServerAddress.setMaximumSize(new java.awt.Dimension(2147483647, 20));
-        jtxtDatabaseServerAddress.setMinimumSize(new java.awt.Dimension(59, 20));
-        jtxtDatabaseServerAddress.addActionListener(new java.awt.event.ActionListener() {
+        jtxtDatabaseHost.setText("192.168.0.101");
+        jtxtDatabaseHost.setMaximumSize(new java.awt.Dimension(2147483647, 20));
+        jtxtDatabaseHost.setMinimumSize(new java.awt.Dimension(59, 20));
+        jtxtDatabaseHost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtxtDatabaseServerAddressActionPerformed(evt);
+                jtxtDatabaseHostActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -221,10 +221,10 @@ public class DatabaseSettingsFrame extends javax.swing.JFrame {
         gridBagConstraints.ipady = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
-        jPanel6.add(jtxtDatabaseServerAddress, gridBagConstraints);
+        jPanel6.add(jtxtDatabaseHost, gridBagConstraints);
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel5.setLabelFor(jtxtDatabaseLogin);
+        jLabel5.setLabelFor(jtxtDatabaseUsername);
         jLabel5.setText("Порт сервера БД");
         jLabel5.setMaximumSize(new java.awt.Dimension(2147483647, 20));
         jLabel5.setMinimumSize(new java.awt.Dimension(100, 20));
@@ -235,9 +235,9 @@ public class DatabaseSettingsFrame extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         jPanel6.add(jLabel5, gridBagConstraints);
 
-        jtxtDatabaseServerPort.setText("5432");
-        jtxtDatabaseServerPort.setMaximumSize(new java.awt.Dimension(2147483647, 20));
-        jtxtDatabaseServerPort.setMinimumSize(new java.awt.Dimension(59, 20));
+        jtxtDatabasePort.setText("5432");
+        jtxtDatabasePort.setMaximumSize(new java.awt.Dimension(2147483647, 20));
+        jtxtDatabasePort.setMinimumSize(new java.awt.Dimension(59, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 4;
@@ -245,7 +245,7 @@ public class DatabaseSettingsFrame extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipady = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        jPanel6.add(jtxtDatabaseServerPort, gridBagConstraints);
+        jPanel6.add(jtxtDatabasePort, gridBagConstraints);
 
         jpasDatabasePassword.setText("postgres");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -263,28 +263,31 @@ public class DatabaseSettingsFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtnSaveConnectionSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSaveConnectionSettingsActionPerformed
-        // TODO add your handling code here:
+        SystemSettings.getSettings().setHost(jtxtDatabaseHost.getText());
+        SystemSettings.getSettings().setPort(Integer.valueOf(jtxtDatabasePort.getText()));
+        SystemSettings.getSettings().setUsername(jtxtDatabaseUsername.getText());
+        SystemSettings.getSettings().setPassword(jpasDatabasePassword.getText());
+        dispose();
         
     }//GEN-LAST:event_jbtnSaveConnectionSettingsActionPerformed
 
     private void jbtnCheckConnectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCheckConnectionActionPerformed
         // TODO add your handling code here:
-//        System.out.print(jtxtDatabaseServerAddress.getText());
-//        System.out.print(jtxtDatabaseServerPort.getText());
-//        System.out.print(jtxtDatabaseLogin.getText());
+//        System.out.print(jtxtDatabaseHost.getText());
+//        System.out.print(jtxtDatabasePort.getText());
+//        System.out.print(jtxtDatabaseUsername.getText());
 //        System.out.print(jpasDatabasePassword.getText());
-//        System.out.print(Integer.valueOf(jtxtDatabaseServerPort.getText()));
+//        System.out.print(Integer.valueOf(jtxtDatabasePort.getText()));
         
-//        HibernateUtil.getSessionFactory(jtxtDatabaseServerAddress.getText(), 
-//                Integer.valueOf(jtxtDatabaseServerPort.getText()), jtxtDatabaseLogin.getText(), jpasDatabasePassword.getText());
-        Boolean flag = ! HibernateUtil.getSessionFactory(jtxtDatabaseServerAddress.getText(), 
-                Integer.valueOf(jtxtDatabaseServerPort.getText()), jtxtDatabaseLogin.getText(), jpasDatabasePassword.getText()).getCurrentSession().isOpen();
+//        HibernateUtil.getSessionFactory(jtxtDatabaseHost.getText(), 
+//                Integer.valueOf(jtxtDatabasePort.getText()), jtxtDatabaseUsername.getText(), jpasDatabasePassword.getText());
+        Boolean flag = ! HibernateUtil.getSessionFactory().getCurrentSession().isOpen();
         jlblMessage.setText(flag.toString());
     }//GEN-LAST:event_jbtnCheckConnectionActionPerformed
 
-    private void jtxtDatabaseServerAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtDatabaseServerAddressActionPerformed
+    private void jtxtDatabaseHostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtDatabaseHostActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtDatabaseServerAddressActionPerformed
+    }//GEN-LAST:event_jtxtDatabaseHostActionPerformed
 
     private void jbtnCancelConnectionSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCancelConnectionSettingsActionPerformed
         // TODO add your handling code here:
@@ -340,8 +343,8 @@ public class DatabaseSettingsFrame extends javax.swing.JFrame {
     private javax.swing.JButton jbtnSaveConnectionSettings;
     private javax.swing.JLabel jlblMessage;
     private javax.swing.JPasswordField jpasDatabasePassword;
-    private javax.swing.JTextField jtxtDatabaseLogin;
-    private javax.swing.JTextField jtxtDatabaseServerAddress;
-    private javax.swing.JTextField jtxtDatabaseServerPort;
+    private javax.swing.JTextField jtxtDatabaseHost;
+    private javax.swing.JTextField jtxtDatabasePort;
+    private javax.swing.JTextField jtxtDatabaseUsername;
     // End of variables declaration//GEN-END:variables
 }
