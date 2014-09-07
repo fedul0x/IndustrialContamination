@@ -11,7 +11,7 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,1,44,0,0,1,-57"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,1,83,0,0,2,43"/>
   </AuxValues>
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
@@ -24,7 +24,10 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JTextField" name="jtxtCompanyFullName">
+    <Component class="javax.swing.JTextField" name="jtxtGangeriousClass">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
           <GridBagConstraints gridX="6" gridY="6" gridWidth="9" gridHeight="1" fill="2" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="10" weightX="1.0" weightY="0.0"/>
@@ -51,14 +54,20 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JTextField" name="jtxtCompanyFullName3">
+    <Component class="javax.swing.JTextField" name="jtxtFederalClassification">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
           <GridBagConstraints gridX="6" gridY="2" gridWidth="9" gridHeight="1" fill="2" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="10" weightX="1.0" weightY="0.0"/>
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JTextField" name="jtxtCompanyFullName4">
+    <Component class="javax.swing.JTextField" name="jtxtFederalName">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="e6" green="e6" red="e6" type="rgb"/>
+        </Property>
+      </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
           <GridBagConstraints gridX="6" gridY="4" gridWidth="9" gridHeight="1" fill="2" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="10" weightX="1.0" weightY="0.0"/>
@@ -96,7 +105,7 @@
     <Container class="javax.swing.JPanel" name="jPanel2">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-          <GridBagConstraints gridX="0" gridY="10" gridWidth="19" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="10" weightX="0.0" weightY="1.0"/>
+          <GridBagConstraints gridX="0" gridY="10" gridWidth="17" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="10" weightX="0.0" weightY="1.0"/>
         </Constraint>
       </Constraints>
 
@@ -113,7 +122,7 @@
         </DimensionLayout>
       </Layout>
     </Container>
-    <Component class="javax.swing.JLabel" name="jLabel17">
+    <Component class="javax.swing.JLabel" name="jlblContaminationComposition">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#x421;&#x43e;&#x441;&#x442;&#x430;&#x432; &#x43e;&#x442;&#x445;&#x43e;&#x434;&#x430;"/>
       </Properties>
@@ -123,20 +132,29 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JTextField" name="jtxtCompanyFullName15">
+    <Component class="javax.swing.JTextField" name="jtxtContaminationComposition">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="e6" green="e6" red="e6" type="rgb"/>
+        </Property>
+      </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
           <GridBagConstraints gridX="6" gridY="8" gridWidth="9" gridHeight="1" fill="2" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="10" weightX="1.0" weightY="0.0"/>
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="jbtnContaminationComposition">
       <Properties>
         <Property name="text" type="java.lang.String" value="..."/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnContaminationCompositionActionPerformed"/>
+      </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-          <GridBagConstraints gridX="18" gridY="8" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="10" weightX="0.0" weightY="0.0"/>
+          <GridBagConstraints gridX="16" gridY="8" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="10" weightX="0.0" weightY="0.0"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -353,11 +371,11 @@
         <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component, java.lang.Object"/>
       </StatementProvider>
       <Parameters>
-        <CodeExpression id="16_jtxtCompanyFullName">
-          <CodeVariable name="jtxtCompanyFullName" type="8194" declaredType="javax.swing.JTextField"/>
+        <CodeExpression id="16_jtxtGangeriousClass">
+          <CodeVariable name="jtxtGangeriousClass" type="8194" declaredType="javax.swing.JTextField"/>
           <ExpressionOrigin>
             <ExpressionProvider type="ComponentRef">
-              <ComponentRef name="jtxtCompanyFullName"/>
+              <ComponentRef name="jtxtGangeriousClass"/>
             </ExpressionProvider>
           </ExpressionOrigin>
         </CodeExpression>
@@ -586,11 +604,11 @@
         <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component, java.lang.Object"/>
       </StatementProvider>
       <Parameters>
-        <CodeExpression id="33_jtxtCompanyFullName3">
-          <CodeVariable name="jtxtCompanyFullName3" type="8194" declaredType="javax.swing.JTextField"/>
+        <CodeExpression id="33_jtxtFederalClassification">
+          <CodeVariable name="jtxtFederalClassification" type="8194" declaredType="javax.swing.JTextField"/>
           <ExpressionOrigin>
             <ExpressionProvider type="ComponentRef">
-              <ComponentRef name="jtxtCompanyFullName3"/>
+              <ComponentRef name="jtxtFederalClassification"/>
             </ExpressionProvider>
           </ExpressionOrigin>
         </CodeExpression>
@@ -681,11 +699,11 @@
         <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component, java.lang.Object"/>
       </StatementProvider>
       <Parameters>
-        <CodeExpression id="40_jtxtCompanyFullName4">
-          <CodeVariable name="jtxtCompanyFullName4" type="8194" declaredType="javax.swing.JTextField"/>
+        <CodeExpression id="40_jtxtFederalName">
+          <CodeVariable name="jtxtFederalName" type="8194" declaredType="javax.swing.JTextField"/>
           <ExpressionOrigin>
             <ExpressionProvider type="ComponentRef">
-              <ComponentRef name="jtxtCompanyFullName4"/>
+              <ComponentRef name="jtxtFederalName"/>
             </ExpressionProvider>
           </ExpressionOrigin>
         </CodeExpression>
@@ -851,7 +869,7 @@
       <Parameters>
         <CodeExpression id="52">
           <ExpressionOrigin>
-            <Value type="int" value="19"/>
+            <Value type="int" value="17"/>
           </ExpressionOrigin>
         </CodeExpression>
       </Parameters>
@@ -944,11 +962,11 @@
         <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component, java.lang.Object"/>
       </StatementProvider>
       <Parameters>
-        <CodeExpression id="59_jLabel17">
-          <CodeVariable name="jLabel17" type="8194" declaredType="javax.swing.JLabel"/>
+        <CodeExpression id="59_jlblContaminationComposition">
+          <CodeVariable name="jlblContaminationComposition" type="8194" declaredType="javax.swing.JLabel"/>
           <ExpressionOrigin>
             <ExpressionProvider type="ComponentRef">
-              <ComponentRef name="jLabel17"/>
+              <ComponentRef name="jlblContaminationComposition"/>
             </ExpressionProvider>
           </ExpressionOrigin>
         </CodeExpression>
@@ -1039,11 +1057,11 @@
         <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component, java.lang.Object"/>
       </StatementProvider>
       <Parameters>
-        <CodeExpression id="66_jtxtCompanyFullName15">
-          <CodeVariable name="jtxtCompanyFullName15" type="8194" declaredType="javax.swing.JTextField"/>
+        <CodeExpression id="66_jtxtContaminationComposition">
+          <CodeVariable name="jtxtContaminationComposition" type="8194" declaredType="javax.swing.JTextField"/>
           <ExpressionOrigin>
             <ExpressionProvider type="ComponentRef">
-              <ComponentRef name="jtxtCompanyFullName15"/>
+              <ComponentRef name="jtxtContaminationComposition"/>
             </ExpressionProvider>
           </ExpressionOrigin>
         </CodeExpression>
@@ -1071,7 +1089,7 @@
       <Parameters>
         <CodeExpression id="68">
           <ExpressionOrigin>
-            <Value type="int" value="18"/>
+            <Value type="int" value="16"/>
           </ExpressionOrigin>
         </CodeExpression>
       </Parameters>
@@ -1095,11 +1113,11 @@
         <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component, java.lang.Object"/>
       </StatementProvider>
       <Parameters>
-        <CodeExpression id="70_jButton1">
-          <CodeVariable name="jButton1" type="8194" declaredType="javax.swing.JButton"/>
+        <CodeExpression id="70_jbtnContaminationComposition">
+          <CodeVariable name="jbtnContaminationComposition" type="8194" declaredType="javax.swing.JButton"/>
           <ExpressionOrigin>
             <ExpressionProvider type="ComponentRef">
-              <ComponentRef name="jButton1"/>
+              <ComponentRef name="jbtnContaminationComposition"/>
             </ExpressionProvider>
           </ExpressionOrigin>
         </CodeExpression>

@@ -15,6 +15,10 @@
  */
 package ru.fedul0x.ic.gui;
 
+import java.awt.CardLayout;
+import ru.fedul0x.ic.dataaccess.DataSourceHibernate;
+import ru.fedul0x.ic.dataaccess.dataobject.ContaminationByFederalClassification;
+import ru.fedul0x.ic.dataaccess.dataobject.ContaminationComposition;
 import ru.fedul0x.ic.dataaccess.dataobject.DataSheet;
 
 /**
@@ -24,19 +28,31 @@ import ru.fedul0x.ic.dataaccess.dataobject.DataSheet;
 public class DataSheetInputPanel extends javax.swing.JPanel {
 
     private DataSheet dataSheet;
+    private ContaminationComposition contaminationComposition;
 
     /**
      * Creates new form DataSheetInputPanel
      */
+    //editable inside
     public DataSheetInputPanel() {
         initComponents();
-        dataSheet = null;
+        dataSheet = new DataSheet();
     }
 
     public DataSheetInputPanel(DataSheet dataSheet) {
-        this();
+        initComponents();
         this.dataSheet = dataSheet;
     }
+    
+    //editable outside
+    public synchronized ContaminationComposition getContaminationComposition() {
+        return contaminationComposition;
+    }
+
+    public synchronized void setContaminationComposition(ContaminationComposition contaminationComposition) {
+        this.contaminationComposition = contaminationComposition;
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -49,17 +65,17 @@ public class DataSheetInputPanel extends javax.swing.JPanel {
         java.awt.GridBagConstraints gridBagConstraints;
 
         jLabel1 = new javax.swing.JLabel();
-        jtxtCompanyFullName = new javax.swing.JTextField();
+        jtxtGangeriousClass = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jtxtCompanyFullName3 = new javax.swing.JTextField();
-        jtxtCompanyFullName4 = new javax.swing.JTextField();
+        jtxtFederalClassification = new javax.swing.JTextField();
+        jtxtFederalName = new javax.swing.JTextField();
         jbtnSaveDataSheet = new javax.swing.JButton();
         jbtnCancel = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jLabel17 = new javax.swing.JLabel();
-        jtxtCompanyFullName15 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jlblContaminationComposition = new javax.swing.JLabel();
+        jtxtContaminationComposition = new javax.swing.JTextField();
+        jbtnContaminationComposition = new javax.swing.JButton();
 
         java.awt.GridBagLayout layout = new java.awt.GridBagLayout();
         layout.columnWidths = new int[] {0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0};
@@ -72,13 +88,15 @@ public class DataSheetInputPanel extends javax.swing.JPanel {
         gridBagConstraints.gridy = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
         add(jLabel1, gridBagConstraints);
+
+        jtxtGangeriousClass.setEditable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.gridwidth = 9;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
-        add(jtxtCompanyFullName, gridBagConstraints);
+        add(jtxtGangeriousClass, gridBagConstraints);
 
         jLabel2.setText("Классификация по ФККО");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -99,14 +117,17 @@ public class DataSheetInputPanel extends javax.swing.JPanel {
         gridBagConstraints.gridwidth = 9;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
-        add(jtxtCompanyFullName3, gridBagConstraints);
+        add(jtxtFederalClassification, gridBagConstraints);
+
+        jtxtFederalName.setEditable(false);
+        jtxtFederalName.setBackground(new java.awt.Color(230, 230, 230));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.gridwidth = 9;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
-        add(jtxtCompanyFullName4, gridBagConstraints);
+        add(jtxtFederalName, gridBagConstraints);
 
         jbtnSaveDataSheet.setAlignmentX(0.5F);
         jbtnSaveDataSheet.setLabel("Сохранить");
@@ -146,53 +167,79 @@ public class DataSheetInputPanel extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 10;
-        gridBagConstraints.gridwidth = 19;
+        gridBagConstraints.gridwidth = 17;
         gridBagConstraints.weighty = 1.0;
         add(jPanel2, gridBagConstraints);
 
-        jLabel17.setText("Состав отхода");
+        jlblContaminationComposition.setText("Состав отхода");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
-        add(jLabel17, gridBagConstraints);
+        add(jlblContaminationComposition, gridBagConstraints);
+
+        jtxtContaminationComposition.setEditable(false);
+        jtxtContaminationComposition.setBackground(new java.awt.Color(230, 230, 230));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 8;
         gridBagConstraints.gridwidth = 9;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
-        add(jtxtCompanyFullName15, gridBagConstraints);
+        add(jtxtContaminationComposition, gridBagConstraints);
 
-        jButton1.setText("...");
+        jbtnContaminationComposition.setText("...");
+        jbtnContaminationComposition.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnContaminationCompositionActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 18;
+        gridBagConstraints.gridx = 16;
         gridBagConstraints.gridy = 8;
-        add(jButton1, gridBagConstraints);
+        add(jbtnContaminationComposition, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtnSaveDataSheetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSaveDataSheetActionPerformed
-        // TODO add your handling code here:
+        //TODO rewrite this
+        dataSheet.setContamination(new ContaminationByFederalClassification());
+        dataSheet.setDangerousCode(Byte.MIN_VALUE);
+        dataSheet.setСontaminationComposition(new ContaminationComposition());
+        
+        DataSourceHibernate<DataSheet> dsh = new DataSourceHibernate<>(DataSheet.class);
+        dsh.makePersistent(dataSheet);
+        if (getParent() instanceof CompanyInputPanel) {
+            ((CompanyInputPanel) getParent()).setDataSheet(dataSheet);
+        }
+        ((CardLayout)getParent().getLayout()).previous(getParent());
+        getParent().remove(this);
     }//GEN-LAST:event_jbtnSaveDataSheetActionPerformed
 
     private void jbtnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCancelActionPerformed
-        // TODO add your handling code here:
-//        this.dispose();
+        ((CardLayout)getParent().getLayout()).previous(getParent());
+        getParent().remove(this);
     }//GEN-LAST:event_jbtnCancelActionPerformed
+
+    private void jbtnContaminationCompositionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnContaminationCompositionActionPerformed
+        //next dialog 
+        ContaminationCompositionInputPanel ccip = new ContaminationCompositionInputPanel();
+        getParent().add(ccip, "ccip");
+        ((CardLayout) getParent().getLayout()).next(getParent());
+    }//GEN-LAST:event_jbtnContaminationCompositionActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton jbtnCancel;
+    private javax.swing.JButton jbtnContaminationComposition;
     private javax.swing.JButton jbtnSaveDataSheet;
-    private javax.swing.JTextField jtxtCompanyFullName;
-    private javax.swing.JTextField jtxtCompanyFullName15;
-    private javax.swing.JTextField jtxtCompanyFullName3;
-    private javax.swing.JTextField jtxtCompanyFullName4;
+    private javax.swing.JLabel jlblContaminationComposition;
+    private javax.swing.JTextField jtxtContaminationComposition;
+    private javax.swing.JTextField jtxtFederalClassification;
+    private javax.swing.JTextField jtxtFederalName;
+    private javax.swing.JTextField jtxtGangeriousClass;
     // End of variables declaration//GEN-END:variables
 }
