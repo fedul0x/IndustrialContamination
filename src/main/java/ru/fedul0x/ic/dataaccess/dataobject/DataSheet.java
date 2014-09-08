@@ -16,10 +16,23 @@
 package ru.fedul0x.ic.dataaccess.dataobject;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import ru.fedul0x.ic.dataaccess.DataEntity;
 
 /**
@@ -37,7 +50,8 @@ public class DataSheet extends DataEntity {
     /**
      * Состав отхода
      */
-    private ContaminationComposition сontaminationComposition;
+    private Set<DataSheetContaminationComposition> dataSheetContaminationCompositions = new HashSet<>(0);
+//    private Set<StockCategory> stockCategories = new HashSet<StockCategory>(0);
     /**
      * Агрегатное состояние
      */
@@ -50,12 +64,14 @@ public class DataSheet extends DataEntity {
      * Класс опасности
      */
     private Byte dangerousCode;
-    
+
     /**
      * Дата создания
      */
     private Date creationDate;
     private DataOperator dataOperator;
+
+    private Company company;
 
     public DataSheet() {
     }
@@ -64,14 +80,18 @@ public class DataSheet extends DataEntity {
         this.id = id;
     }
 
-    public DataSheet(ContaminationByFederalClassification contamination, ContaminationComposition сontaminationComposition, Byte dangerousCode) {
+    public DataSheet(ContaminationByFederalClassification contamination, AggregativeState aggregativeState, String technologicalProcess, Byte dangerousCode, Date creationDate, DataOperator dataOperator) {
         this.contamination = contamination;
-        this.сontaminationComposition = сontaminationComposition;
+        this.aggregativeState = aggregativeState;
+        this.technologicalProcess = technologicalProcess;
         this.dangerousCode = dangerousCode;
+        this.creationDate = creationDate;
+        this.dataOperator = dataOperator;
     }
 
     @Id
-    @Column(name = "id", unique = true, nullable = false)
+    @GeneratedValue(strategy = IDENTITY)
+    @Column(name = "data_sheet_id", unique = true, nullable = false)
     @Override
     public Long getId() {
         return this.id;
@@ -82,6 +102,7 @@ public class DataSheet extends DataEntity {
         this.id = id;
     }
 
+    @OneToOne
     public ContaminationByFederalClassification getContamination() {
         return contamination;
     }
@@ -90,14 +111,16 @@ public class DataSheet extends DataEntity {
         this.contamination = contamination;
     }
 
-    public ContaminationComposition getСontaminationComposition() {
-        return сontaminationComposition;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.dataSheet", cascade = CascadeType.ALL)
+    public Set<DataSheetContaminationComposition> getDataSheetContaminationCompositions() {
+        return dataSheetContaminationCompositions;
     }
 
-    public void setСontaminationComposition(ContaminationComposition сontaminationComposition) {
-        this.сontaminationComposition = сontaminationComposition;
+    public void setDataSheetContaminationCompositions(Set<DataSheetContaminationComposition> dataSheetContaminationCompositions) {
+        this.dataSheetContaminationCompositions = dataSheetContaminationCompositions;
     }
 
+    @OneToOne
     public AggregativeState getAggregativeState() {
         return aggregativeState;
     }
@@ -106,6 +129,7 @@ public class DataSheet extends DataEntity {
         this.aggregativeState = aggregativeState;
     }
 
+    @Column(name = "technological_process")
     public String getTechnologicalProcess() {
         return technologicalProcess;
     }
@@ -114,6 +138,7 @@ public class DataSheet extends DataEntity {
         this.technologicalProcess = technologicalProcess;
     }
 
+    @Column(name = "dangerous_code")
     public Byte getDangerousCode() {
         return dangerousCode;
     }
@@ -122,6 +147,8 @@ public class DataSheet extends DataEntity {
         this.dangerousCode = dangerousCode;
     }
 
+    @Temporal(TemporalType.DATE)
+    @Column(name = "creation_date", nullable = false)
     public Date getCreationDate() {
         return creationDate;
     }
@@ -129,7 +156,8 @@ public class DataSheet extends DataEntity {
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
-    
+
+    @OneToOne
     public DataOperator getDataOperator() {
         return dataOperator;
     }
@@ -137,4 +165,57 @@ public class DataSheet extends DataEntity {
     public void setDataOperator(DataOperator dataOperator) {
         this.dataOperator = dataOperator;
     }
+
+    @ManyToOne
+    @JoinColumn(name = "company", nullable = true)
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 53 * hash + Objects.hashCode(this.contamination);
+        hash = 53 * hash + Objects.hashCode(this.aggregativeState);
+        hash = 53 * hash + Objects.hashCode(this.technologicalProcess);
+        hash = 53 * hash + Objects.hashCode(this.dangerousCode);
+        hash = 53 * hash + Objects.hashCode(this.creationDate);
+        hash = 53 * hash + Objects.hashCode(this.dataOperator);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final DataSheet other = (DataSheet) obj;
+        if (!Objects.equals(this.contamination, other.contamination)) {
+            return false;
+        }
+        if (!Objects.equals(this.aggregativeState, other.aggregativeState)) {
+            return false;
+        }
+        if (!Objects.equals(this.technologicalProcess, other.technologicalProcess)) {
+            return false;
+        }
+        if (!Objects.equals(this.dangerousCode, other.dangerousCode)) {
+            return false;
+        }
+        if (!Objects.equals(this.creationDate, other.creationDate)) {
+            return false;
+        }
+        if (!Objects.equals(this.dataOperator, other.dataOperator)) {
+            return false;
+        }
+        return true;
+    }
+
 }

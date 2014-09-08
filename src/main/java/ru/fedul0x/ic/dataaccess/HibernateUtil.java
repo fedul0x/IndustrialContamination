@@ -62,9 +62,12 @@ public class HibernateUtil {
         AnnotationConfiguration configuration = new AnnotationConfiguration()
                 .addAnnotatedClass(ru.fedul0x.ic.dataaccess.dataobject.Company.class)
                 .addAnnotatedClass(ru.fedul0x.ic.dataaccess.dataobject.Contamination.class)
+                .addAnnotatedClass(ru.fedul0x.ic.dataaccess.dataobject.AggregativeState.class)
                 .addAnnotatedClass(ru.fedul0x.ic.dataaccess.dataobject.ContaminationComposition.class)
-                .addAnnotatedClass(ru.fedul0x.ic.dataaccess.dataobject.ContaminationByFederalClassification.class)
                 .addAnnotatedClass(ru.fedul0x.ic.dataaccess.dataobject.DataSheet.class)
+                .addAnnotatedClass(ru.fedul0x.ic.dataaccess.dataobject.DataSheetContaminationComposition.class)
+                .addAnnotatedClass(ru.fedul0x.ic.dataaccess.dataobject.DataSheetContaminationCompositionId.class)
+                .addAnnotatedClass(ru.fedul0x.ic.dataaccess.dataobject.ContaminationByFederalClassification.class)
                 .addAnnotatedClass(ru.fedul0x.ic.dataaccess.dataobject.DataOperator.class)
                 .setProperties(props);
         configuration.configure(file);

@@ -204,7 +204,7 @@ public class DataSheetInputPanel extends javax.swing.JPanel {
         //TODO rewrite this
         dataSheet.setContamination(new ContaminationByFederalClassification());
         dataSheet.setDangerousCode(Byte.MIN_VALUE);
-        dataSheet.setСontaminationComposition(new ContaminationComposition());
+//        dataSheet.setСontaminationComposition(new ContaminationComposition());
         
         DataSourceHibernate<DataSheet> dsh = new DataSourceHibernate<>(DataSheet.class);
         dsh.makePersistent(dataSheet);

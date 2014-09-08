@@ -4,9 +4,13 @@ package ru.fedul0x.ic.dataaccess.dataobject;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -49,11 +53,7 @@ public class Company extends DataEntity {
     private Date issueDate;
     private Date receiptDate;
 
-    private Set dataSheets = new HashSet(0);
-
-    ;
-
-    
+    private Set<DataSheet> dataSheets = new HashSet<>(0);
 
     public Company() {
     }
@@ -176,6 +176,7 @@ public class Company extends DataEntity {
         this.phoneNumber = phoneNumber;
     }
 
+    @Column(name = "inn")
     public String getInn() {
         return inn;
     }
@@ -184,6 +185,7 @@ public class Company extends DataEntity {
         this.inn = inn;
     }
 
+    @Column(name = "okpo")
     public String getOkpo() {
         return okpo;
     }
@@ -192,6 +194,7 @@ public class Company extends DataEntity {
         this.okpo = okpo;
     }
 
+    @Column(name = "okved")
     public String getOkved() {
         return okved;
     }
@@ -200,6 +203,7 @@ public class Company extends DataEntity {
         this.okved = okved;
     }
 
+    @Column(name = "email")
     public String getEmail() {
         return email;
     }
@@ -208,6 +212,7 @@ public class Company extends DataEntity {
         this.email = email;
     }
 
+    @Column(name = "legal_address")
     public String getLegalAddress() {
         return legalAddress;
     }
@@ -216,6 +221,7 @@ public class Company extends DataEntity {
         this.legalAddress = legalAddress;
     }
 
+    @Column(name = "postal_address")
     public String getPostalAddress() {
         return postalAddress;
     }
@@ -224,6 +230,7 @@ public class Company extends DataEntity {
         this.postalAddress = postalAddress;
     }
 
+    @Column(name = "location")
     public String getLocation() {
         return location;
     }
@@ -232,11 +239,13 @@ public class Company extends DataEntity {
         this.location = location;
     }
 
-    public Set getDataSheets() {
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "company")
+    public Set<DataSheet> getDataSheets() {
         return dataSheets;
     }
 
-    public void setDataSheet(Set dataSheets) {
+    public void setDataSheets(Set<DataSheet> dataSheets) {
         this.dataSheets = dataSheets;
     }
+
 }

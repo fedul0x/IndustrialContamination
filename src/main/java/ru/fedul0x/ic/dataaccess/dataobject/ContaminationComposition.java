@@ -16,9 +16,16 @@
 package ru.fedul0x.ic.dataaccess.dataobject;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import ru.fedul0x.ic.dataaccess.DataEntity;
 
@@ -30,10 +37,26 @@ import ru.fedul0x.ic.dataaccess.DataEntity;
 @Table(name = "contamination_composition", schema = "public")
 public class ContaminationComposition extends DataEntity {
 
-    private HashMap<Contamination, Double> contaminations;
+    private String name;
+//    private HashMap<Contamination, Double> contaminations;
+//    private Set<StockCategory> stockCategories = new HashSet<StockCategory>(0);
+    private Set<DataSheetContaminationComposition> dataSheetContaminationCompositions = new HashSet<>(0);
+
+    public ContaminationComposition() {
+    }
+
+    public ContaminationComposition(String name) {
+        this.name = name;
+    }
+
+    public ContaminationComposition(String name, Set<DataSheetContaminationComposition> dataSheetContaminationCompositions) {
+        this.name = name;
+        this.dataSheetContaminationCompositions = dataSheetContaminationCompositions;
+    }
 
     @Id
-    @Column(name = "id", unique = true, nullable = false)
+    @GeneratedValue(strategy = IDENTITY)
+    @Column(name = "contamination_composition_id", unique = true, nullable = false)
     @Override
     public Long getId() {
         return this.id;
@@ -44,12 +67,43 @@ public class ContaminationComposition extends DataEntity {
         this.id = id;
     }
 
-    public HashMap<Contamination, Double> getContaminations() {
-        return contaminations;
+    @Column(name = "name")
+    public String getName() {
+        return name;
     }
 
-    public void setContaminations(HashMap<Contamination, Double> contaminations) {
-        this.contaminations = contaminations;
+    public void setName(String name) {
+        this.name = name;
     }
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.contaminationComposition")
+    public Set<DataSheetContaminationComposition> getDataSheetContaminationCompositions() {
+        return dataSheetContaminationCompositions;
+    }
+
+    public void setDataSheetContaminationCompositions(Set<DataSheetContaminationComposition> dataSheetContaminationCompositions) {
+        this.dataSheetContaminationCompositions = dataSheetContaminationCompositions;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 83 * hash + Objects.hashCode(this.name);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ContaminationComposition other = (ContaminationComposition) obj;
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        return true;
+    }
 }
