@@ -73,8 +73,9 @@ public class DataSourceHibernate<T extends DataEntity> extends DataSource<T> {
             example.excludeProperty(exclude);
         }
         crit.add(example);
+        List<T> result = crit.list();
         commitTransaction();
-        return crit.list();
+        return result;
     }
     
     protected List<T> findByCriteria(Criterion... criterion) {

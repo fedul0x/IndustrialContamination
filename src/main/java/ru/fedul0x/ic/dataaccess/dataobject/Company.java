@@ -2,6 +2,8 @@ package ru.fedul0x.ic.dataaccess.dataobject;
 
 // Generated 23.12.2012 2:11:14 by Hibernate Tools 3.2.1.GA
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -39,13 +41,19 @@ public class Company extends DataEntity {
      * Почтовый адрес
      */
     private String postalAddress;
+    /**
+     * Местонахождение
+     */
+    private String location;
 
     private Date issueDate;
     private Date receiptDate;
 
-    private DataSheet dataSheet;
+    private Set dataSheets = new HashSet(0);
 
-    private DataOperator dataOperator;
+    ;
+
+    
 
     public Company() {
     }
@@ -54,7 +62,7 @@ public class Company extends DataEntity {
         this.id = id;
     }
 
-    public Company(String fullName, String abbreviatedName, String positionOfHead, String lastName, String firstName, String middleName, String inn, String okpo, String okved, String email, String mobilePhone, String legalAddress, String postalAddress, Date issueDate, Date receiptDate, DataSheet dataSheet, DataOperator dataOperator) {
+    public Company(String fullName, String abbreviatedName, String positionOfHead, String lastName, String firstName, String middleName, String inn, String okpo, String okved, String email, String phoneNumber, String legalAddress, String postalAddress, String location, Date issueDate, Date receiptDate) {
         this.fullName = fullName;
         this.abbreviatedName = abbreviatedName;
         this.positionOfHead = positionOfHead;
@@ -65,13 +73,12 @@ public class Company extends DataEntity {
         this.okpo = okpo;
         this.okved = okved;
         this.email = email;
-        this.phoneNumber = mobilePhone;
+        this.phoneNumber = phoneNumber;
         this.legalAddress = legalAddress;
         this.postalAddress = postalAddress;
+        this.location = location;
         this.issueDate = issueDate;
         this.receiptDate = receiptDate;
-        this.dataSheet = dataSheet;
-        this.dataOperator = dataOperator;
     }
 
     @Id
@@ -160,7 +167,7 @@ public class Company extends DataEntity {
         this.receiptDate = receiptDate;
     }
 
-     @Column(name = "phone_number")
+    @Column(name = "phone_number")
     public String getPhoneNumber() {
         return this.phoneNumber;
     }
@@ -217,21 +224,19 @@ public class Company extends DataEntity {
         this.postalAddress = postalAddress;
     }
 
-    public DataSheet getDataSheet() {
-        return dataSheet;
+    public String getLocation() {
+        return location;
     }
 
-    public void setDataSheet(DataSheet dataSheet) {
-        this.dataSheet = dataSheet;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
-    public DataOperator getDataOperator() {
-        return dataOperator;
+    public Set getDataSheets() {
+        return dataSheets;
     }
 
-    public void setDataOperator(DataOperator dataOperator) {
-        this.dataOperator = dataOperator;
+    public void setDataSheet(Set dataSheets) {
+        this.dataSheets = dataSheets;
     }
-
- 
 }

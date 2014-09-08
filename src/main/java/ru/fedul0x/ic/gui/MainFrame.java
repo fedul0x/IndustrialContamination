@@ -17,6 +17,7 @@ package ru.fedul0x.ic.gui;
 
 import java.awt.CardLayout;
 import ru.fedul0x.ic.dataaccess.dataobject.ContaminationByFederalClassification;
+import ru.fedul0x.ic.dataaccess.dataobject.DataOperator;
 import ru.fedul0x.ic.view.component.model.HibernateRowTableModel;
 
 /**
@@ -25,11 +26,33 @@ import ru.fedul0x.ic.view.component.model.HibernateRowTableModel;
  */
 public class MainFrame extends javax.swing.JFrame {
 
+    private DataOperator currentOperator = null;
+
+    public synchronized DataOperator getCurrentOperator() {
+        return currentOperator;
+    }
+
+    public synchronized void setCurrentOperator(DataOperator currentOperator) {
+        this.currentOperator = currentOperator;
+        if (null != currentOperator) {
+            jmenuStart.setText(currentOperator.getLogin());
+            jmenuDatabaseSettings.setEnabled(false);
+            jitemLogin.setEnabled(false);
+            jitemLogout.setEnabled(true);
+        } else {
+            jmenuStart.setText("Начало");
+            jmenuDatabaseSettings.setEnabled(true);
+            jitemLogin.setEnabled(true);
+            jitemLogout.setEnabled(false);
+        }
+    }
+
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
         initComponents();
+        setCurrentOperator(null);
     }
 
     /**
@@ -42,17 +65,16 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jtablFKKO = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jmenuLogin = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jmenuStart = new javax.swing.JMenu();
+        jmenuDatabaseSettings = new javax.swing.JMenuItem();
         jitemLogin = new javax.swing.JMenuItem();
+        jitemLogout = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jitemExit = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jmenuUserActions = new javax.swing.JMenu();
+        jitemCompanyInput = new javax.swing.JMenuItem();
         jmenuHandbook = new javax.swing.JMenu();
         jitemFKKO = new javax.swing.JMenuItem();
         jmenuAbout = new javax.swing.JMenu();
@@ -60,56 +82,57 @@ public class MainFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.CardLayout());
+        getContentPane().add(jPanel1, "card2");
 
-        jPanel1.setLayout(new java.awt.CardLayout());
+        jmenuStart.setText("Начало");
 
-        jButton1.setText("jButton1");
-        jPanel1.add(jButton1, "card4");
-
-        jLabel1.setText("jLabel1");
-        jPanel1.add(jLabel1, "card5");
-
-        jtablFKKO.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jtablFKKO);
-
-        jPanel1.add(jScrollPane1, "card2");
-
-        getContentPane().add(jPanel1, "card3");
-
-        jmenuLogin.setText("Начало");
-
-        jMenuItem1.setText("Настройки БД");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jmenuDatabaseSettings.setText("Настройки БД");
+        jmenuDatabaseSettings.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jmenuDatabaseSettingsActionPerformed(evt);
             }
         });
-        jmenuLogin.add(jMenuItem1);
+        jmenuStart.add(jmenuDatabaseSettings);
 
-        jitemLogin.setText("Авторизация");
+        jitemLogin.setText("Вход");
         jitemLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jitemLoginActionPerformed(evt);
             }
         });
-        jmenuLogin.add(jitemLogin);
-        jmenuLogin.add(jSeparator2);
+        jmenuStart.add(jitemLogin);
+
+        jitemLogout.setText("Выход");
+        jitemLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jitemLogoutActionPerformed(evt);
+            }
+        });
+        jmenuStart.add(jitemLogout);
+        jmenuStart.add(jSeparator2);
 
         jitemExit.setText("Выход из программы");
-        jmenuLogin.add(jitemExit);
-        jmenuLogin.add(jSeparator1);
+        jitemExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jitemExitActionPerformed(evt);
+            }
+        });
+        jmenuStart.add(jitemExit);
+        jmenuStart.add(jSeparator1);
 
-        jMenuBar1.add(jmenuLogin);
+        jMenuBar1.add(jmenuStart);
+
+        jmenuUserActions.setText("Действия");
+
+        jitemCompanyInput.setText("Добавить организацию");
+        jitemCompanyInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jitemCompanyInputActionPerformed(evt);
+            }
+        });
+        jmenuUserActions.add(jitemCompanyInput);
+
+        jMenuBar1.add(jmenuUserActions);
 
         jmenuHandbook.setText("Справочники");
 
@@ -142,18 +165,18 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jitemLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jitemLoginActionPerformed
         LoginFrame.main(this);
-        
+
     }//GEN-LAST:event_jitemLoginActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        DatabaseSettingsFrame mainFrame = new DatabaseSettingsFrame();
-        mainFrame.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    private void jmenuDatabaseSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmenuDatabaseSettingsActionPerformed
+        DatabaseSettingsFrame.main();
+    }//GEN-LAST:event_jmenuDatabaseSettingsActionPerformed
 
     private void jitemFKKOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jitemFKKOActionPerformed
         HibernateRowTableModel<ContaminationByFederalClassification> hrtm = new HibernateRowTableModel(ContaminationByFederalClassification.class);
-        jtablFKKO.setModel(hrtm);
-// TODO add your handling code here:
+        TablePanel tp = new TablePanel(hrtm, false);
+        this.add(tp, "tp");
+        ((CardLayout) getContentPane().getLayout()).next(this.getContentPane());
     }//GEN-LAST:event_jitemFKKOActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -162,6 +185,22 @@ public class MainFrame extends javax.swing.JFrame {
 //        ((CardLayout)getContentPane().getLayout()).next(this);
 //        ((CardLayout)jPanel1.getLayout()).next(this);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jitemLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jitemLogoutActionPerformed
+        setCurrentOperator(null);
+    }//GEN-LAST:event_jitemLogoutActionPerformed
+
+    private void jitemExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jitemExitActionPerformed
+        dispose();
+    }//GEN-LAST:event_jitemExitActionPerformed
+
+    private void jitemCompanyInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jitemCompanyInputActionPerformed
+        CompanyInputPanel cip = new CompanyInputPanel();
+        this.add(cip, "cip");
+        ((CardLayout) getContentPane().getLayout()).show(this.getContentPane(), "cip");
+
+        this.revalidate();
+    }//GEN-LAST:event_jitemCompanyInputActionPerformed
 
     /**
      * @param args the command line arguments
@@ -199,21 +238,20 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JMenuItem jitemCompanyInput;
     private javax.swing.JMenuItem jitemExit;
     private javax.swing.JMenuItem jitemFKKO;
     private javax.swing.JMenuItem jitemLogin;
+    private javax.swing.JMenuItem jitemLogout;
     private javax.swing.JMenu jmenuAbout;
+    private javax.swing.JMenuItem jmenuDatabaseSettings;
     private javax.swing.JMenu jmenuHandbook;
-    private javax.swing.JMenu jmenuLogin;
-    private javax.swing.JTable jtablFKKO;
+    private javax.swing.JMenu jmenuStart;
+    private javax.swing.JMenu jmenuUserActions;
     // End of variables declaration//GEN-END:variables
 }

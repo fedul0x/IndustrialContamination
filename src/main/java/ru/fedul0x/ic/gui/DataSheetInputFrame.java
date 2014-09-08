@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Юлия.
+ * Copyright 2014 Ivashin Alexey <ivashin.alexei@gmail.com>.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,19 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package ru.fedul0x.ic.gui;
 
 /**
  *
- * @author Юлия
+ * @author Ivashin Alexey <ivashin.alexei@gmail.com>
  */
-public class DataSheetInput extends javax.swing.JFrame {
+public class DataSheetInputFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form DataSheetInput
      */
-    public DataSheetInput() {
+    public DataSheetInputFrame() {
         initComponents();
     }
 
@@ -196,20 +195,20 @@ public class DataSheetInput extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DataSheetInput.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DataSheetInputFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DataSheetInput.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DataSheetInputFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DataSheetInput.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DataSheetInputFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DataSheetInput.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DataSheetInputFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DataSheetInput().setVisible(true);
+                new DataSheetInputFrame().setVisible(true);
             }
         });
     }

@@ -27,7 +27,8 @@ import ru.fedul0x.ic.dataaccess.TitledColumn;
  * @author Ivashin Alexey <ivashin.alexei@gmail.com>
  */
 @Entity
-@Table(name = "federal_classification_of_contaminations", schema = "public")
+//@Table(name = "federal_classification_of_contaminations", schema = "public")
+@Table(name = "contamination_by_federal_classification", schema = "public")
 public class ContaminationByFederalClassification extends DataEntity {
 
     private Long code;

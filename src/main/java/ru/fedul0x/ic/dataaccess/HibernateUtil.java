@@ -30,6 +30,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
+import ru.fedul0x.ic.SystemSettings;
 
 public class HibernateUtil {
 
@@ -42,38 +43,39 @@ public class HibernateUtil {
     private static SessionFactory buildSessionFactory() {
 //        try {
 //            Configuration configuration = new Configuration();
-            File file = new File("src/main/java/hibernate.cfg.xml");
+        File file = new File("src/main/java/hibernate.cfg.xml");
 //            configuration.configure(file);
-            Properties props = new Properties();
-            StringBuffer url = new StringBuffer();
-            Formatter formatter = new Formatter(url, Locale.US);
-            formatter.format("jdbc:postgresql://%s:%d/industrial_contamination", host, port);
+        Properties props = new Properties();
+        StringBuffer url = new StringBuffer();
+        Formatter formatter = new Formatter(url, Locale.US);
+        formatter.format("jdbc:postgresql://%s:%d/industrial_contamination",
+                SystemSettings.getSettings().getHost(), SystemSettings.getSettings().getPort());
 //            props.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
 //            props.setProperty("hibernate.connection.driver_class", "org.postgresql.Driver");
-            props.setProperty("hibernate.connection.url", url.toString());
-            props.setProperty("hibernate.connection.username", login);
-            props.setProperty("hibernate.connection.password", password);
+        props.setProperty("hibernate.connection.url", url.toString());
+        props.setProperty("hibernate.connection.username", SystemSettings.getSettings().getUsername());
+        props.setProperty("hibernate.connection.password", SystemSettings.getSettings().getPassword());
 //            props.setProperty("hibernate.show_sql", "true");
 //            props.setProperty("hibernate.current_session_context_class", "thread");
 //            props.setProperty("hibernate.hbm2ddl.auto", "update");
-            //TODO automaticly find all DataEntity class
-            AnnotationConfiguration configuration = new AnnotationConfiguration()
-                    .addAnnotatedClass(ru.fedul0x.ic.dataaccess.dataobject.Company.class)
-                    .addAnnotatedClass(ru.fedul0x.ic.dataaccess.dataobject.Contamination.class)
-                    .addAnnotatedClass(ru.fedul0x.ic.dataaccess.dataobject.ContaminationComposition.class)
-                    .addAnnotatedClass(ru.fedul0x.ic.dataaccess.dataobject.ContaminationByFederalClassification.class)
-                    .addAnnotatedClass(ru.fedul0x.ic.dataaccess.dataobject.DataSheet.class)
-                    .addAnnotatedClass(ru.fedul0x.ic.dataaccess.dataobject.DataOperator.class)
-                    .setProperties(props);
-            configuration.configure(file);
-            //apply configuration property settings to StandardServiceRegistryBuilder
-            ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
-            System.out.println("Hibernate serviceRegistry created");
+        //TODO automaticly find all DataEntity class
+        AnnotationConfiguration configuration = new AnnotationConfiguration()
+                .addAnnotatedClass(ru.fedul0x.ic.dataaccess.dataobject.Company.class)
+                .addAnnotatedClass(ru.fedul0x.ic.dataaccess.dataobject.Contamination.class)
+                .addAnnotatedClass(ru.fedul0x.ic.dataaccess.dataobject.ContaminationComposition.class)
+                .addAnnotatedClass(ru.fedul0x.ic.dataaccess.dataobject.ContaminationByFederalClassification.class)
+                .addAnnotatedClass(ru.fedul0x.ic.dataaccess.dataobject.DataSheet.class)
+                .addAnnotatedClass(ru.fedul0x.ic.dataaccess.dataobject.DataOperator.class)
+                .setProperties(props);
+        configuration.configure(file);
+        //apply configuration property settings to StandardServiceRegistryBuilder
+        ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
+        System.out.println("Hibernate serviceRegistry created");
 
-            SessionFactory sessionFactory = configuration
-                    .buildSessionFactory(serviceRegistry);
+        SessionFactory sessionFactory = configuration
+                .buildSessionFactory(serviceRegistry);
 
-            return sessionFactory;
+        return sessionFactory;
 //        } catch (Throwable ex) {
 //            // Make sure you log the exception, as it might be swallowed
 //            System.err.println("Initial SessionFactory creation failed." + ex);
@@ -81,22 +83,11 @@ public class HibernateUtil {
 //        }
     }
 
-    public static SessionFactory getSessionFactory(String host, int port, String login, String password) {
-        if (!((HibernateUtil.host == host) && (HibernateUtil.port == port)
-                && (HibernateUtil.login == login) && (HibernateUtil.password == password))) {
-            HibernateUtil.host = host;
-            HibernateUtil.port = port;
-            HibernateUtil.login = login;
-            HibernateUtil.password = password;
+    public static SessionFactory getSessionFactory() {
+        if (null == sessionFactory) {
             sessionFactory = buildSessionFactory();
         }
         return sessionFactory;
     }
 
-    public static SessionFactory getSessionFactory() {
-        if (null == sessionFactory) {
-            throw new ExceptionInInitializerError();
-        }
-        return sessionFactory;
-    }
 }

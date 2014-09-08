@@ -13,10 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package ru.fedul0x.ic.gui;
 
+import java.util.List;
+import ru.fedul0x.ic.dataaccess.DataSourceHibernate;
 import ru.fedul0x.ic.dataaccess.HibernateUtil;
+import ru.fedul0x.ic.dataaccess.dataobject.DataOperator;
 
 /**
  *
@@ -24,8 +26,10 @@ import ru.fedul0x.ic.dataaccess.HibernateUtil;
  */
 public class LoginFrame extends javax.swing.JFrame {
 
+    private static MainFrame mainFrame;
+
     /**
-     * Creates new form 
+     * Creates new form
      */
     public LoginFrame() {
         initComponents();
@@ -43,15 +47,15 @@ public class LoginFrame extends javax.swing.JFrame {
 
         jLabel2 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
-        jbtnCancelConnectionSettings = new javax.swing.JButton();
-        jbtnSaveConnectionSettings = new javax.swing.JButton();
+        jpnlMain = new javax.swing.JPanel();
+        jbtnCancelLogin = new javax.swing.JButton();
+        jbtnLogin = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jlblMessage = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jtxtDatabaseServerAddress = new javax.swing.JTextField();
-        jpasDatabasePassword = new javax.swing.JPasswordField();
+        jtxtDataOperatorUsername = new javax.swing.JTextField();
+        jpasDataOperatorPassword = new javax.swing.JPasswordField();
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Порт сервера БД ");
@@ -71,19 +75,20 @@ public class LoginFrame extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Настройки соединения с БД");
+        setTitle("Авторизация");
         setMinimumSize(new java.awt.Dimension(320, 280));
+        getContentPane().setLayout(new java.awt.BorderLayout());
 
         java.awt.GridBagLayout jPanel6Layout = new java.awt.GridBagLayout();
         jPanel6Layout.columnWidths = new int[] {0, 8, 0, 8, 0, 8, 0, 8, 0};
         jPanel6Layout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
-        jPanel6.setLayout(jPanel6Layout);
+        jpnlMain.setLayout(jPanel6Layout);
 
-        jbtnCancelConnectionSettings.setAlignmentX(0.5F);
-        jbtnCancelConnectionSettings.setLabel("Отмена");
-        jbtnCancelConnectionSettings.addActionListener(new java.awt.event.ActionListener() {
+        jbtnCancelLogin.setAlignmentX(0.5F);
+        jbtnCancelLogin.setLabel("Отмена");
+        jbtnCancelLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnCancelConnectionSettingsActionPerformed(evt);
+                jbtnCancelLoginActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -91,13 +96,13 @@ public class LoginFrame extends javax.swing.JFrame {
         gridBagConstraints.gridy = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
-        jPanel6.add(jbtnCancelConnectionSettings, gridBagConstraints);
+        jpnlMain.add(jbtnCancelLogin, gridBagConstraints);
 
-        jbtnSaveConnectionSettings.setText("Войти");
-        jbtnSaveConnectionSettings.setAlignmentX(0.5F);
-        jbtnSaveConnectionSettings.addActionListener(new java.awt.event.ActionListener() {
+        jbtnLogin.setText("Войти");
+        jbtnLogin.setAlignmentX(0.5F);
+        jbtnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnSaveConnectionSettingsActionPerformed(evt);
+                jbtnLoginActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -105,7 +110,7 @@ public class LoginFrame extends javax.swing.JFrame {
         gridBagConstraints.gridy = 8;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 1;
-        jPanel6.add(jbtnSaveConnectionSettings, gridBagConstraints);
+        jpnlMain.add(jbtnLogin, gridBagConstraints);
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Пароль пользователя");
@@ -115,9 +120,10 @@ public class LoginFrame extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.ipadx = 18;
+        gridBagConstraints.ipadx = 65;
+        gridBagConstraints.ipady = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        jPanel6.add(jLabel3, gridBagConstraints);
+        jpnlMain.add(jLabel3, gridBagConstraints);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -146,7 +152,7 @@ public class LoginFrame extends javax.swing.JFrame {
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.ipady = 30;
         gridBagConstraints.weighty = 1.0;
-        jPanel6.add(jPanel1, gridBagConstraints);
+        jpnlMain.add(jPanel1, gridBagConstraints);
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Имя пользователя");
@@ -156,16 +162,16 @@ public class LoginFrame extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.ipadx = 6;
+        gridBagConstraints.ipadx = 45;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        jPanel6.add(jLabel4, gridBagConstraints);
+        jpnlMain.add(jLabel4, gridBagConstraints);
 
-        jtxtDatabaseServerAddress.setText("admin");
-        jtxtDatabaseServerAddress.setMaximumSize(new java.awt.Dimension(2147483647, 20));
-        jtxtDatabaseServerAddress.setMinimumSize(new java.awt.Dimension(59, 20));
-        jtxtDatabaseServerAddress.addActionListener(new java.awt.event.ActionListener() {
+        jtxtDataOperatorUsername.setText("admin");
+        jtxtDataOperatorUsername.setMaximumSize(new java.awt.Dimension(2147483647, 20));
+        jtxtDataOperatorUsername.setMinimumSize(new java.awt.Dimension(59, 20));
+        jtxtDataOperatorUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtxtDatabaseServerAddressActionPerformed(evt);
+                jtxtDataOperatorUsernameActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -176,9 +182,9 @@ public class LoginFrame extends javax.swing.JFrame {
         gridBagConstraints.ipady = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
-        jPanel6.add(jtxtDatabaseServerAddress, gridBagConstraints);
+        jpnlMain.add(jtxtDataOperatorUsername, gridBagConstraints);
 
-        jpasDatabasePassword.setText("admin");
+        jpasDataOperatorPassword.setText("admin");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 4;
@@ -186,31 +192,41 @@ public class LoginFrame extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipady = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        jPanel6.add(jpasDatabasePassword, gridBagConstraints);
+        jpnlMain.add(jpasDataOperatorPassword, gridBagConstraints);
 
-        getContentPane().add(jPanel6, java.awt.BorderLayout.CENTER);
+        getContentPane().add(jpnlMain, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbtnSaveConnectionSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSaveConnectionSettingsActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jbtnSaveConnectionSettingsActionPerformed
+    private void jbtnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnLoginActionPerformed
+        String username = jtxtDataOperatorUsername.getText();
+        String password = jpasDataOperatorPassword.getText();
+        DataSourceHibernate<DataOperator> dsh = new DataSourceHibernate<>(DataOperator.class);
+        String[] excludes = {"id"};
+        List<DataOperator> operators = dsh.findByExample(new DataOperator(10L, username, password), excludes);
+        if (operators.size() > 0) {
+            mainFrame.setCurrentOperator(operators.get(0));
+        } else {
+            mainFrame.setCurrentOperator(null);
+        }
+        dispose();
+    }//GEN-LAST:event_jbtnLoginActionPerformed
 
-    private void jtxtDatabaseServerAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtDatabaseServerAddressActionPerformed
+    private void jtxtDataOperatorUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtDataOperatorUsernameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtDatabaseServerAddressActionPerformed
+    }//GEN-LAST:event_jtxtDataOperatorUsernameActionPerformed
 
-    private void jbtnCancelConnectionSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCancelConnectionSettingsActionPerformed
+    private void jbtnCancelLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCancelLoginActionPerformed
         // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_jbtnCancelConnectionSettingsActionPerformed
+    }//GEN-LAST:event_jbtnCancelLoginActionPerformed
 
     /**
+     * @param mainFrame
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(MainFrame mainFrame) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -235,6 +251,7 @@ public class LoginFrame extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        LoginFrame.mainFrame = mainFrame;
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new LoginFrame().setVisible(true);
@@ -248,11 +265,11 @@ public class LoginFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JButton jbtnCancelConnectionSettings;
-    private javax.swing.JButton jbtnSaveConnectionSettings;
+    private javax.swing.JButton jbtnCancelLogin;
+    private javax.swing.JButton jbtnLogin;
     private javax.swing.JLabel jlblMessage;
-    private javax.swing.JPasswordField jpasDatabasePassword;
-    private javax.swing.JTextField jtxtDatabaseServerAddress;
+    private javax.swing.JPasswordField jpasDataOperatorPassword;
+    private javax.swing.JPanel jpnlMain;
+    private javax.swing.JTextField jtxtDataOperatorUsername;
     // End of variables declaration//GEN-END:variables
 }

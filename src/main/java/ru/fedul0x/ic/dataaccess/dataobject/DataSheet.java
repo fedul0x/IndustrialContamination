@@ -15,6 +15,7 @@
  */
 package ru.fedul0x.ic.dataaccess.dataobject;
 
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -38,9 +39,23 @@ public class DataSheet extends DataEntity {
      */
     private ContaminationComposition сontaminationComposition;
     /**
+     * Агрегатное состояние
+     */
+    private AggregativeState aggregativeState;
+    /**
+     * Образовано в результате (технологический процесс)
+     */
+    private String technologicalProcess;
+    /**
      * Класс опасности
      */
     private Byte dangerousCode;
+    
+    /**
+     * Дата создания
+     */
+    private Date creationDate;
+    private DataOperator dataOperator;
 
     public DataSheet() {
     }
@@ -83,6 +98,22 @@ public class DataSheet extends DataEntity {
         this.сontaminationComposition = сontaminationComposition;
     }
 
+    public AggregativeState getAggregativeState() {
+        return aggregativeState;
+    }
+
+    public void setAggregativeState(AggregativeState aggregativeState) {
+        this.aggregativeState = aggregativeState;
+    }
+
+    public String getTechnologicalProcess() {
+        return technologicalProcess;
+    }
+
+    public void setTechnologicalProcess(String technologicalProcess) {
+        this.technologicalProcess = technologicalProcess;
+    }
+
     public Byte getDangerousCode() {
         return dangerousCode;
     }
@@ -91,4 +122,19 @@ public class DataSheet extends DataEntity {
         this.dangerousCode = dangerousCode;
     }
 
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+    
+    public DataOperator getDataOperator() {
+        return dataOperator;
+    }
+
+    public void setDataOperator(DataOperator dataOperator) {
+        this.dataOperator = dataOperator;
+    }
 }

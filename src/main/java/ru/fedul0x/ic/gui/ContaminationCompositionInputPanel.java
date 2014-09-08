@@ -18,41 +18,55 @@ package ru.fedul0x.ic.gui;
 import java.awt.CardLayout;
 import java.awt.Container;
 import java.util.Formatter;
+import ru.fedul0x.ic.dataaccess.dataobject.ContaminationComposition;
 import ru.fedul0x.ic.dataaccess.dataobject.DataSheet;
 
 /**
  *
-  * @author Ivashin Alexey <ivashin.alexei@gmail.com>
+ * @author Ivashin Alexey <ivashin.alexei@gmail.com>
  */
 public class ContaminationCompositionInputPanel extends javax.swing.JPanel {
 
-    private DataSheet dataSheet;
+    private ContaminationComposition contaminationComposition;
 
     /**
      * Creates new form CompanyInputPanel
      */
     public ContaminationCompositionInputPanel() {
         initComponents();
-        dataSheet = null;
+        contaminationComposition = null;
 
     }
 
-    public synchronized DataSheet getDataSheet() {
-        return dataSheet;
+    public ContaminationCompositionInputPanel(ContaminationComposition contaminationComposition) {
+        initComponents();
+        this.contaminationComposition = contaminationComposition;
     }
 
-    public synchronized void setDataSheet(DataSheet dataSheet) {
-        this.dataSheet = dataSheet;
-        if (null == dataSheet) {
-            jtxtBalance.setText("");
-        } else {
-            StringBuffer buf = new StringBuffer();
-            Formatter format = new Formatter(buf);
-            format.format("%d (%s)", dataSheet.getContamination().getCode(), dataSheet.getContamination().getDescription());
-            jtxtBalance.setText(format.toString());
-        }
+    //editable outside
+    public ContaminationComposition getContaminationComposition() {
+        return contaminationComposition;
     }
 
+    public void setContaminationComposition(ContaminationComposition contaminationComposition) {
+        this.contaminationComposition = contaminationComposition;
+    }
+
+//    public synchronized DataSheet getDataSheet() {
+//        return dataSheet;
+//    }
+//
+//    public synchronized void setDataSheet(DataSheet dataSheet) {
+//        this.dataSheet = dataSheet;
+//        if (null == dataSheet) {
+//            jtxtBalance.setText("");
+//        } else {
+//            StringBuffer buf = new StringBuffer();
+//            Formatter format = new Formatter(buf);
+//            format.format("%d (%s)", dataSheet.getContamination().getCode(), dataSheet.getContamination().getDescription());
+//            jtxtBalance.setText(format.toString());
+//        }
+//    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -63,7 +77,7 @@ public class ContaminationCompositionInputPanel extends javax.swing.JPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jbtnSaveCompany = new javax.swing.JButton();
+        jbtnSaveContaminationComposition = new javax.swing.JButton();
         jbtnCancel = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
@@ -76,17 +90,17 @@ public class ContaminationCompositionInputPanel extends javax.swing.JPanel {
         layout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
         setLayout(layout);
 
-        jbtnSaveCompany.setAlignmentX(0.5F);
-        jbtnSaveCompany.setLabel("Сохранить");
-        jbtnSaveCompany.addActionListener(new java.awt.event.ActionListener() {
+        jbtnSaveContaminationComposition.setAlignmentX(0.5F);
+        jbtnSaveContaminationComposition.setLabel("Сохранить");
+        jbtnSaveContaminationComposition.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnSaveCompanyActionPerformed(evt);
+                jbtnSaveContaminationCompositionActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 12;
         gridBagConstraints.gridy = 38;
-        add(jbtnSaveCompany, gridBagConstraints);
+        add(jbtnSaveContaminationComposition, gridBagConstraints);
 
         jbtnCancel.setAlignmentX(0.5F);
         jbtnCancel.setLabel("Отмена");
@@ -138,9 +152,6 @@ public class ContaminationCompositionInputPanel extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
                 {null, null}
             },
             new String [] {
@@ -158,14 +169,13 @@ public class ContaminationCompositionInputPanel extends javax.swing.JPanel {
         add(jScrollPane1, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbtnSaveCompanyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSaveCompanyActionPerformed
+    private void jbtnSaveContaminationCompositionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSaveContaminationCompositionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jbtnSaveCompanyActionPerformed
+    }//GEN-LAST:event_jbtnSaveContaminationCompositionActionPerformed
 
     private void jbtnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCancelActionPerformed
-        Container parent = getParent();
-        parent.remove(this);
-        parent.revalidate();
+        ((CardLayout)getParent().getLayout()).previous(getParent());
+        getParent().remove(this);
     }//GEN-LAST:event_jbtnCancelActionPerformed
 
 
@@ -175,7 +185,7 @@ public class ContaminationCompositionInputPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton jbtnCancel;
-    private javax.swing.JButton jbtnSaveCompany;
+    private javax.swing.JButton jbtnSaveContaminationComposition;
     private javax.swing.JTextField jtxtBalance;
     // End of variables declaration//GEN-END:variables
 }

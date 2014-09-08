@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Ivashin Alexey <ivashin.alexei@gmail.com>.
+ * Copyright 2014 fedul0x.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,20 +13,44 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package ru.fedul0x.ic.gui;
+
+import java.awt.CardLayout;
+import java.awt.Container;
+import java.util.Formatter;
+import ru.fedul0x.ic.dataaccess.dataobject.DataSheet;
 
 /**
  *
- * @author Ivashin Alexey <ivashin.alexei@gmail.com>
+ * @author fedul0x
  */
-public class CompanyInputFrame extends javax.swing.JFrame {
+public class CompanyInputPanel extends javax.swing.JPanel {
+
+    private DataSheet dataSheet;
 
     /**
-     * Creates new form CompanyInputFrame
+     * Creates new form CompanyInputPanel
      */
-    public CompanyInputFrame() {
+    public CompanyInputPanel() {
         initComponents();
+        dataSheet = null;
+
+    }
+
+    public synchronized DataSheet getDataSheet() {
+        return dataSheet;
+    }
+
+    public synchronized void setDataSheet(DataSheet dataSheet) {
+        this.dataSheet = dataSheet;
+        if (null == dataSheet) {
+            jtxtDataSheet.setText("");
+        } else {
+            StringBuffer buf = new StringBuffer();
+            Formatter format = new Formatter(buf);
+            format.format("%d (%s)", dataSheet.getContamination().getCode(), dataSheet.getContamination().getDescription());
+            jtxtDataSheet.setText(format.toString());
+        }
     }
 
     /**
@@ -39,7 +63,6 @@ public class CompanyInputFrame extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jtxtCompanyFullName = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -75,234 +98,231 @@ public class CompanyInputFrame extends javax.swing.JFrame {
         jbtnCancel = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
-        jtxtCompanyFullName15 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jtxtDataSheet = new javax.swing.JTextField();
+        jbtnDataSheet = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
-
-        java.awt.GridBagLayout jPanel1Layout = new java.awt.GridBagLayout();
-        jPanel1Layout.columnWidths = new int[] {0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0};
-        jPanel1Layout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
-        jPanel1.setLayout(jPanel1Layout);
+        java.awt.GridBagLayout layout = new java.awt.GridBagLayout();
+        layout.columnWidths = new int[] {0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0};
+        layout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
+        setLayout(layout);
 
         jLabel1.setText("Сокращенное наименование");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 8;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
-        jPanel1.add(jLabel1, gridBagConstraints);
+        add(jLabel1, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridx = 12;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridwidth = 9;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
-        jPanel1.add(jtxtCompanyFullName, gridBagConstraints);
+        add(jtxtCompanyFullName, gridBagConstraints);
 
         jLabel2.setText("Полное наименование");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 8;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
-        jPanel1.add(jLabel2, gridBagConstraints);
+        add(jLabel2, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridx = 12;
         gridBagConstraints.gridy = 10;
-        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridwidth = 9;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
-        jPanel1.add(jtxtCompanyFullName1, gridBagConstraints);
+        add(jtxtCompanyFullName1, gridBagConstraints);
 
         jLabel3.setText("Должность");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 8;
         gridBagConstraints.gridy = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
-        jPanel1.add(jLabel3, gridBagConstraints);
+        add(jLabel3, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridx = 12;
         gridBagConstraints.gridy = 12;
-        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridwidth = 9;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
-        jPanel1.add(jtxtCompanyFullName2, gridBagConstraints);
+        add(jtxtCompanyFullName2, gridBagConstraints);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setText("Руководитель");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 8;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
-        jPanel1.add(jLabel4, gridBagConstraints);
+        add(jLabel4, gridBagConstraints);
 
         jLabel5.setText("Фамилия");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 8;
         gridBagConstraints.gridy = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
-        jPanel1.add(jLabel5, gridBagConstraints);
+        add(jLabel5, gridBagConstraints);
 
         jLabel6.setText("Имя");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 8;
         gridBagConstraints.gridy = 12;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
-        jPanel1.add(jLabel6, gridBagConstraints);
+        add(jLabel6, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridx = 12;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridwidth = 9;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
-        jPanel1.add(jtxtCompanyFullName3, gridBagConstraints);
+        add(jtxtCompanyFullName3, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridx = 12;
         gridBagConstraints.gridy = 8;
-        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridwidth = 9;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
-        jPanel1.add(jtxtCompanyFullName4, gridBagConstraints);
+        add(jtxtCompanyFullName4, gridBagConstraints);
 
         jLabel7.setText("Отчество");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 8;
         gridBagConstraints.gridy = 14;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
-        jPanel1.add(jLabel7, gridBagConstraints);
+        add(jLabel7, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridx = 12;
         gridBagConstraints.gridy = 14;
-        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridwidth = 9;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
-        jPanel1.add(jtxtCompanyFullName5, gridBagConstraints);
+        add(jtxtCompanyFullName5, gridBagConstraints);
 
         jLabel8.setText("ИНН");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 8;
         gridBagConstraints.gridy = 16;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
-        jPanel1.add(jLabel8, gridBagConstraints);
+        add(jLabel8, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridx = 12;
         gridBagConstraints.gridy = 16;
-        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridwidth = 9;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
-        jPanel1.add(jtxtCompanyFullName6, gridBagConstraints);
+        add(jtxtCompanyFullName6, gridBagConstraints);
 
         jLabel9.setText("ОКПО");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 8;
         gridBagConstraints.gridy = 18;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
-        jPanel1.add(jLabel9, gridBagConstraints);
+        add(jLabel9, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridx = 12;
         gridBagConstraints.gridy = 18;
-        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridwidth = 9;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
-        jPanel1.add(jtxtCompanyFullName7, gridBagConstraints);
+        add(jtxtCompanyFullName7, gridBagConstraints);
 
         jLabel10.setText("ОКВЭД");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 8;
         gridBagConstraints.gridy = 20;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
-        jPanel1.add(jLabel10, gridBagConstraints);
+        add(jLabel10, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridx = 12;
         gridBagConstraints.gridy = 20;
-        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridwidth = 9;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
-        jPanel1.add(jtxtCompanyFullName8, gridBagConstraints);
+        add(jtxtCompanyFullName8, gridBagConstraints);
 
         jLabel11.setText("Электронная почта");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 8;
         gridBagConstraints.gridy = 22;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
-        jPanel1.add(jLabel11, gridBagConstraints);
+        add(jLabel11, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridx = 12;
         gridBagConstraints.gridy = 22;
-        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridwidth = 9;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
-        jPanel1.add(jtxtCompanyFullName9, gridBagConstraints);
+        add(jtxtCompanyFullName9, gridBagConstraints);
 
         jLabel12.setText("Телефон");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 8;
         gridBagConstraints.gridy = 24;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
-        jPanel1.add(jLabel12, gridBagConstraints);
+        add(jLabel12, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridx = 12;
         gridBagConstraints.gridy = 24;
-        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridwidth = 9;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
-        jPanel1.add(jtxtCompanyFullName10, gridBagConstraints);
+        add(jtxtCompanyFullName10, gridBagConstraints);
 
         jLabel13.setText("Юридический адрес");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 8;
         gridBagConstraints.gridy = 26;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
-        jPanel1.add(jLabel13, gridBagConstraints);
+        add(jLabel13, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridx = 12;
         gridBagConstraints.gridy = 26;
-        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridwidth = 9;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
-        jPanel1.add(jtxtCompanyFullName11, gridBagConstraints);
+        add(jtxtCompanyFullName11, gridBagConstraints);
 
         jLabel14.setText("Почтовый адрес");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 8;
         gridBagConstraints.gridy = 28;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
-        jPanel1.add(jLabel14, gridBagConstraints);
+        add(jLabel14, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridx = 12;
         gridBagConstraints.gridy = 28;
-        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridwidth = 9;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
-        jPanel1.add(jtxtCompanyFullName12, gridBagConstraints);
+        add(jtxtCompanyFullName12, gridBagConstraints);
 
         jLabel15.setText("Дата приемки");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 8;
         gridBagConstraints.gridy = 30;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
-        jPanel1.add(jLabel15, gridBagConstraints);
+        add(jLabel15, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridx = 12;
         gridBagConstraints.gridy = 30;
-        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridwidth = 9;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
-        jPanel1.add(jtxtCompanyFullName13, gridBagConstraints);
+        add(jtxtCompanyFullName13, gridBagConstraints);
 
         jLabel16.setText("Дата выдачи");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 8;
         gridBagConstraints.gridy = 32;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
-        jPanel1.add(jLabel16, gridBagConstraints);
+        add(jLabel16, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridx = 12;
         gridBagConstraints.gridy = 32;
-        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridwidth = 9;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
-        jPanel1.add(jtxtCompanyFullName14, gridBagConstraints);
+        add(jtxtCompanyFullName14, gridBagConstraints);
 
         jbtnSaveCompany.setAlignmentX(0.5F);
         jbtnSaveCompany.setLabel("Сохранить");
@@ -312,9 +332,9 @@ public class CompanyInputFrame extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridx = 12;
         gridBagConstraints.gridy = 38;
-        jPanel1.add(jbtnSaveCompany, gridBagConstraints);
+        add(jbtnSaveCompany, gridBagConstraints);
 
         jbtnCancel.setAlignmentX(0.5F);
         jbtnCancel.setLabel("Отмена");
@@ -324,9 +344,9 @@ public class CompanyInputFrame extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridx = 14;
         gridBagConstraints.gridy = 38;
-        jPanel1.add(jbtnCancel, gridBagConstraints);
+        add(jbtnCancel, gridBagConstraints);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -342,82 +362,58 @@ public class CompanyInputFrame extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 36;
-        gridBagConstraints.gridwidth = 13;
+        gridBagConstraints.gridwidth = 25;
         gridBagConstraints.weighty = 1.0;
-        jPanel1.add(jPanel2, gridBagConstraints);
+        add(jPanel2, gridBagConstraints);
 
         jLabel17.setText("Паспорт");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 8;
         gridBagConstraints.gridy = 34;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
-        jPanel1.add(jLabel17, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 34;
-        gridBagConstraints.gridwidth = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        jPanel1.add(jtxtCompanyFullName15, gridBagConstraints);
+        add(jLabel17, gridBagConstraints);
 
-        jButton1.setText("...");
+        jtxtDataSheet.setEditable(false);
+        jtxtDataSheet.setBackground(new java.awt.Color(230, 230, 230));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 12;
         gridBagConstraints.gridy = 34;
-        jPanel1.add(jButton1, gridBagConstraints);
+        gridBagConstraints.gridwidth = 9;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        add(jtxtDataSheet, gridBagConstraints);
 
-        getContentPane().add(jPanel1);
-
-        pack();
+        jbtnDataSheet.setText("...");
+        jbtnDataSheet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnDataSheetActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 22;
+        gridBagConstraints.gridy = 34;
+        add(jbtnDataSheet, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtnSaveCompanyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSaveCompanyActionPerformed
         // TODO add your handling code here:
-
     }//GEN-LAST:event_jbtnSaveCompanyActionPerformed
 
     private void jbtnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCancelActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
+        Container parent = getParent();
+        parent.remove(this);
+        parent.revalidate();
     }//GEN-LAST:event_jbtnCancelActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CompanyInputFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CompanyInputFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CompanyInputFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CompanyInputFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void jbtnDataSheetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDataSheetActionPerformed
+        DataSheetInputPanel dsip = new DataSheetInputPanel();
+        getParent().add(dsip, "dsip");
+//        ((CardLayout)getParent().getLayout()).show(getParent(), "dsip");
+        ((CardLayout) getParent().getLayout()).next(getParent());
+    }//GEN-LAST:event_jbtnDataSheetActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CompanyInputFrame().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -435,9 +431,9 @@ public class CompanyInputFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton jbtnCancel;
+    private javax.swing.JButton jbtnDataSheet;
     private javax.swing.JButton jbtnSaveCompany;
     private javax.swing.JTextField jtxtCompanyFullName;
     private javax.swing.JTextField jtxtCompanyFullName1;
@@ -446,7 +442,6 @@ public class CompanyInputFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jtxtCompanyFullName12;
     private javax.swing.JTextField jtxtCompanyFullName13;
     private javax.swing.JTextField jtxtCompanyFullName14;
-    private javax.swing.JTextField jtxtCompanyFullName15;
     private javax.swing.JTextField jtxtCompanyFullName2;
     private javax.swing.JTextField jtxtCompanyFullName3;
     private javax.swing.JTextField jtxtCompanyFullName4;
@@ -455,5 +450,6 @@ public class CompanyInputFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jtxtCompanyFullName7;
     private javax.swing.JTextField jtxtCompanyFullName8;
     private javax.swing.JTextField jtxtCompanyFullName9;
+    private javax.swing.JTextField jtxtDataSheet;
     // End of variables declaration//GEN-END:variables
 }

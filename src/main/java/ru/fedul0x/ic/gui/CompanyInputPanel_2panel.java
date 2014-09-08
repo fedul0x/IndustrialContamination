@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Ivashin Alexey <ivashin.alexei@gmail.com>.
+ * Copyright 2014 fedul0x.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,14 +18,14 @@ package ru.fedul0x.ic.gui;
 
 /**
  *
- * @author Ivashin Alexey <ivashin.alexei@gmail.com>
+ * @author fedul0x
  */
-public class CompanyInputFrame extends javax.swing.JFrame {
+public class CompanyInputPanel_2panel extends javax.swing.JPanel {
 
     /**
-     * Creates new form CompanyInputFrame
+     * Creates new form CompanyInputPanel
      */
-    public CompanyInputFrame() {
+    public CompanyInputPanel_2panel() {
         initComponents();
     }
 
@@ -76,15 +76,11 @@ public class CompanyInputFrame extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         jtxtCompanyFullName15 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jbtnDataSheet = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
+        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
-        java.awt.GridBagLayout jPanel1Layout = new java.awt.GridBagLayout();
-        jPanel1Layout.columnWidths = new int[] {0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0, 8, 0};
-        jPanel1Layout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
-        jPanel1.setLayout(jPanel1Layout);
+        jPanel1.setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setText("Сокращенное наименование");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -360,64 +356,27 @@ public class CompanyInputFrame extends javax.swing.JFrame {
         gridBagConstraints.weightx = 1.0;
         jPanel1.add(jtxtCompanyFullName15, gridBagConstraints);
 
-        jButton1.setText("...");
+        jbtnDataSheet.setText("...");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 12;
         gridBagConstraints.gridy = 34;
-        jPanel1.add(jButton1, gridBagConstraints);
+        jPanel1.add(jbtnDataSheet, gridBagConstraints);
 
-        getContentPane().add(jPanel1);
-
-        pack();
+        add(jPanel1);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtnSaveCompanyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSaveCompanyActionPerformed
         // TODO add your handling code here:
-
     }//GEN-LAST:event_jbtnSaveCompanyActionPerformed
 
     private void jbtnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCancelActionPerformed
         // TODO add your handling code here:
-        this.dispose();
+//        this.dispose();
+        getParent().remove(this);
     }//GEN-LAST:event_jbtnCancelActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CompanyInputFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CompanyInputFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CompanyInputFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CompanyInputFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CompanyInputFrame().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -438,6 +397,7 @@ public class CompanyInputFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton jbtnCancel;
+    private javax.swing.JButton jbtnDataSheet;
     private javax.swing.JButton jbtnSaveCompany;
     private javax.swing.JTextField jtxtCompanyFullName;
     private javax.swing.JTextField jtxtCompanyFullName1;
