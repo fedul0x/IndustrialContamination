@@ -16,10 +16,14 @@
 package ru.fedul0x.ic.gui;
 
 import java.awt.CardLayout;
-import java.awt.Container;
-import java.util.Formatter;
+import java.util.List;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JComboBox;
+import javax.swing.table.TableColumn;
+import ru.fedul0x.ic.dataaccess.DataSourceHibernate;
 import ru.fedul0x.ic.dataaccess.dataobject.ContaminationComposition;
-import ru.fedul0x.ic.dataaccess.dataobject.DataSheet;
+import ru.fedul0x.ic.gui.component.model.AutoCompletion;
+import ru.fedul0x.ic.gui.component.model.HibernatedComboBoxModel;
 
 /**
  *
@@ -28,14 +32,82 @@ import ru.fedul0x.ic.dataaccess.dataobject.DataSheet;
 public class ContaminationCompositionInputPanel extends javax.swing.JPanel {
 
     private ContaminationComposition contaminationComposition;
+    private List<ContaminationComposition> allContaminations;
 
     /**
      * Creates new form CompanyInputPanel
      */
+    public void updateComboBox() {
+        DataSourceHibernate<ContaminationComposition> dsh = new DataSourceHibernate<>(ContaminationComposition.class);
+        allContaminations = dsh.findAll();
+//        jTable1.setDefaultEditor(null, null);
+//        jTable1.setDefaultEditor(Integer.class,
+//                new IntegerEditor(0, 100));
+        TableColumn nameColumn = jTable1.getColumnModel().getColumn(0);
+        JComboBox cb = new JComboBox();
+        cb.setModel(new HibernatedComboBoxModel());
+        cb.setEditable(true);
+        AutoCompletion.enable(cb);
+        DefaultCellEditor dce = new DefaultCellEditor(cb);
+
+        dce.setClickCountToStart(2);
+        nameColumn.setCellEditor(dce);
+//        dce.addCellEditorListener(new CellEditorListener() {
+//
+//            @Override
+//            public void editingStopped(ChangeEvent ce) {
+//                System.out.println("In key pressed");
+//                DefaultCellEditor dce = (DefaultCellEditor) ce.getSource();
+//                System.out.println(dce.getCellEditorValue().toString());
+//                DataSourceHibernate<ContaminationComposition> dsh = new DataSourceHibernate<>(ContaminationComposition.class);
+//                ContaminationComposition cc = new ContaminationComposition(dce.getCellEditorValue().toString());
+//                dsh.makePersistent(cc);
+//                String[] ep = {"id", "dataSheetContaminationCompositions"};
+//                if (dsh.findByExample(cc, ep).size() == 1) {
+//                    updateComboBox();
+//                }
+//            }
+//
+//            @Override
+//            public void editingCanceled(ChangeEvent ce) {
+//            }
+//        });
+        //this is JSpinner
+//        TableColumn portionColumn = jTable1.getColumnModel().getColumn(1);
+//        JSpinner sp = new JSpinner();
+//        portionColumn.setCe  CellEditor(new DefaultCellEditor(sp));
+    }
+
     public ContaminationCompositionInputPanel() {
         initComponents();
         contaminationComposition = null;
+        updateComboBox();
 
+//        cb.addKeyListener(new KeyAdapter() {
+//            @Override
+//            public void keyPressed(KeyEvent e) {
+//                System.out.println("In key pressed");
+//                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+//                    System.out.println("Delete key hit");
+//                    JComboBox cb = ((JComboBox) e.getSource());                    
+//                    DataSourceHibernate<ContaminationComposition> dsh = new DataSourceHibernate<>(ContaminationComposition.class);
+//                    ContaminationComposition cc = new ContaminationComposition(cb.getSelectedItem().toString());
+//                    dsh.makePersistent(cc);
+//                    String[] ep = {"id", "dataSheetContaminationCompositions"};
+//                    if (dsh.findByExample(cc, ep).size() == 1) {
+//                        cb.addItem(cb.getSelectedItem().toString());
+//                    }
+//                }
+//            }
+//        });
+//        TableColumn portionColumn = jTable1.getColumnModel().getColumn(1);
+//        JComboBox cb2 = new JComboBox();
+//        cb2.addItem("1");
+//        cb2.addItem("2");
+//        cb2.addItem("3");
+//        cb2.addItem("4");
+//        cb2.addItem("5");
+//        portionColumn.setCellEditor(new DefaultCellEditor(cb2));
     }
 
     public ContaminationCompositionInputPanel(ContaminationComposition contaminationComposition) {
@@ -171,10 +243,15 @@ public class ContaminationCompositionInputPanel extends javax.swing.JPanel {
 
     private void jbtnSaveContaminationCompositionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSaveContaminationCompositionActionPerformed
         // TODO add your handling code here:
+        ContaminationComposition cc = new ContaminationComposition("картон");
+        ContaminationComposition cc2 = new ContaminationComposition("бумага");
+        DataSourceHibernate<ContaminationComposition> dsh = new DataSourceHibernate<>(ContaminationComposition.class);
+        dsh.makePersistent(cc);
+        dsh.makePersistent(cc2);
     }//GEN-LAST:event_jbtnSaveContaminationCompositionActionPerformed
 
     private void jbtnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCancelActionPerformed
-        ((CardLayout)getParent().getLayout()).previous(getParent());
+        ((CardLayout) getParent().getLayout()).previous(getParent());
         getParent().remove(this);
     }//GEN-LAST:event_jbtnCancelActionPerformed
 

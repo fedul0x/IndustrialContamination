@@ -33,10 +33,13 @@ import ru.fedul0x.ic.dataaccess.DataEntity;
  *
  * @author Ivashin Alexey <ivashin.alexei@gmail.com>
  */
+//TODO rename all to ContaminationComposition
 @Entity
 @Table(name = "contamination_composition", schema = "public")
 public class ContaminationComposition extends DataEntity {
-
+    /**
+     * Наименование отхода
+     */
     private String name;
 //    private HashMap<Contamination, Double> contaminations;
 //    private Set<StockCategory> stockCategories = new HashSet<StockCategory>(0);

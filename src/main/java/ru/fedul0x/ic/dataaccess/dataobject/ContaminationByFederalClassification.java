@@ -17,6 +17,8 @@ package ru.fedul0x.ic.dataaccess.dataobject;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import ru.fedul0x.ic.dataaccess.DataEntity;
@@ -52,6 +54,7 @@ public class ContaminationByFederalClassification extends DataEntity {
 
     @Id
     @Column(name = "id", unique = true, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Override
     public Long getId() {
         return this.id;

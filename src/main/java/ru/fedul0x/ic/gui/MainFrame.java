@@ -53,6 +53,10 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
         setCurrentOperator(null);
+          ContaminationCompositionInputPanel ccip = new ContaminationCompositionInputPanel();
+       this.add(ccip, "ccip");
+        ((CardLayout) getContentPane().getLayout()).show(this.getContentPane(), "ccip");
+        this.revalidate();
     }
 
     /**
@@ -199,6 +203,11 @@ public class MainFrame extends javax.swing.JFrame {
         this.add(cip, "cip");
         ((CardLayout) getContentPane().getLayout()).show(this.getContentPane(), "cip");
 
+        this.revalidate();
+        
+        ContaminationCompositionInputPanel ccip = new ContaminationCompositionInputPanel();
+       this.add(ccip, "ccip");
+        ((CardLayout) getContentPane().getLayout()).show(this.getContentPane(), "ccip");
         this.revalidate();
     }//GEN-LAST:event_jitemCompanyInputActionPerformed
 

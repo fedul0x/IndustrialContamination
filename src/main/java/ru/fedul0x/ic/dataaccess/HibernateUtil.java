@@ -35,10 +35,6 @@ import ru.fedul0x.ic.SystemSettings;
 public class HibernateUtil {
 
     private static SessionFactory sessionFactory;
-    private static String host;
-    private static int port;
-    private static String login;
-    private static String password;
 
     private static SessionFactory buildSessionFactory() {
 //        try {
@@ -48,7 +44,9 @@ public class HibernateUtil {
         Properties props = new Properties();
         StringBuffer url = new StringBuffer();
         Formatter formatter = new Formatter(url, Locale.US);
+//        jdbc:derby://localhost:1527/sample
         formatter.format("jdbc:postgresql://%s:%d/industrial_contamination",
+//        formatter.format("jdbc:derby://%s:%d/industrial_contamination",
                 SystemSettings.getSettings().getHost(), SystemSettings.getSettings().getPort());
 //            props.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
 //            props.setProperty("hibernate.connection.driver_class", "org.postgresql.Driver");
@@ -61,7 +59,7 @@ public class HibernateUtil {
         //TODO automaticly find all DataEntity class
         AnnotationConfiguration configuration = new AnnotationConfiguration()
                 .addAnnotatedClass(ru.fedul0x.ic.dataaccess.dataobject.Company.class)
-                .addAnnotatedClass(ru.fedul0x.ic.dataaccess.dataobject.Contamination.class)
+//                .addAnnotatedClass(ru.fedul0x.ic.dataaccess.dataobject.Contamination.class)
                 .addAnnotatedClass(ru.fedul0x.ic.dataaccess.dataobject.AggregativeState.class)
                 .addAnnotatedClass(ru.fedul0x.ic.dataaccess.dataobject.ContaminationComposition.class)
                 .addAnnotatedClass(ru.fedul0x.ic.dataaccess.dataobject.DataSheet.class)
