@@ -34,9 +34,18 @@ import ru.fedul0x.ic.dataaccess.TitledId;
 public class HibernateRowTableModel<T extends DataEntity> extends RowTableModel<T> {
 
     private ArrayList<Method> methods = new ArrayList<>();
+    /**
+     * Поля и их последовательность, с которой они должны находиться в JTable
+     */
+    private List<String> fields;
 
-    public HibernateRowTableModel(Class rowClass) {
+    public HibernateRowTableModel(Class rowClass, String[] fields) {
         super(rowClass);
+        this.fields = new ArrayList<>();
+        for (String str : fields) {
+            this.fields.add(str);
+        }
+
         List<String> columns = new ArrayList<>();
         DataSourceHibernate<T> dsh = new DataSourceHibernate<>(rowClass);
         ArrayList<T> data = (ArrayList<T>) dsh.findAll();
@@ -45,7 +54,7 @@ public class HibernateRowTableModel<T extends DataEntity> extends RowTableModel<
         for (Field key : titleAndMethods.keySet()) {
             alts.clear();
             if (null != key.getAnnotation(TitledColumn.class)) {
-                alts.add(key.getAnnotation(TitledColumn.class).table());
+                alts.add(key.getAnnotation(TitledColumn.class).title());
             }
             if (null != key.getAnnotation(TitledId.class)) {
                 alts.add(key.getAnnotation(TitledId.class).title());
@@ -79,12 +88,103 @@ public class HibernateRowTableModel<T extends DataEntity> extends RowTableModel<
             }
 
             //TODO REWRITE THIS
-            columns.add(column);
-            try {
-                methods.add(getMethod(key));
+            if (!column.isEmpty()) {
+                columns.add(column);
+                try {
+                    methods.add(getMethod(key));
 //                columnClasses[column.length() - 1] = getMethod(key).getReturnType();
+                } catch (NoSuchMethodException ex) {
+                    Logger.getLogger(HibernateRowTableModel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        //Проверка, есть ли в columns все, что есть в fields
+        if (this.fields.size() > columns.size()) {
+            throw new IllegalArgumentException("this.fields.size() > columns.size()");
+        }
+        //TODO containsALL maybe
+        for (String str : fields) {
+            if (!columns.contains(str)) {
+                throw new IllegalArgumentException("(!columns.contains(str))");
+            }
+        }
+        //Сортировака columns и methods в соответсвии с this.fields
+
+        for (int i = columns.size() - 1; i >= 0; i--) {
+            for (int j = 0; j < i; j++) {
+                String argj = columns.get(j);
+                String argjp1 = columns.get(j + 1);
+                Method mj = methods.get(j);
+                Method mjp1 = methods.get(j + 1);
+
+                if (this.fields.indexOf(argj) > this.fields.indexOf(argjp1)) {
+                    columns.set(j, argjp1);
+                    columns.set(j + 1, argj);
+                    methods.set(j, mjp1);
+                    methods.set(j + 1, mj);
+                }
+            }
+        }
+
+        setDataAndColumnNames(data, columns);
+        for (int i = 0; i < methods.size(); i++) {
+            columnClasses[i] = methods.get(i).getReturnType();
+
+        }
+    }
+
+    public HibernateRowTableModel(Class rowClass) {
+        super(rowClass);
+        List<String> columns = new ArrayList<>();
+        DataSourceHibernate<T> dsh = new DataSourceHibernate<>(rowClass);
+        ArrayList<T> data = (ArrayList<T>) dsh.findAll();
+        HashMap<Field, Method> titleAndMethods = (HashMap<Field, Method>) getFieldsAndMethods(rowClass);
+        List<String> alts = new ArrayList<>();
+        for (Field key : titleAndMethods.keySet()) {
+            alts.clear();
+            if (null != key.getAnnotation(TitledColumn.class)) {
+                alts.add(key.getAnnotation(TitledColumn.class).title());
+            }
+            if (null != key.getAnnotation(TitledId.class)) {
+                alts.add(key.getAnnotation(TitledId.class).title());
+            }
+            try {
+                if (null != getMethod(key).getAnnotation(TitledColumn.class)) {
+                    alts.add(getMethod(key).getAnnotation(TitledColumn.class).title());
+                }
+                if (null != getMethod(key).getAnnotation(TitledId.class)) {
+                    alts.add(getMethod(key).getAnnotation(TitledId.class).title());
+                }
             } catch (NoSuchMethodException ex) {
-                Logger.getLogger(HibernateRowTableModel.class.getName()).log(Level.SEVERE, null, ex);
+                continue;
+            }
+            String column = "";
+            for (String item : alts) {
+                if ((item != null) && (!item.isEmpty())) {
+                    column = item;
+                }
+            }
+            //TODO REWRITE THIS
+            Class cond;
+            try {
+                cond = getMethod(key).getReturnType().getSuperclass();
+            } catch (NoSuchMethodException ex) {
+                continue;
+            }
+            if ((cond == DataEntity.class)
+                    || (cond == Set.class)) {
+                continue;
+            }
+
+            //TODO REWRITE THIS
+            if (!column.isEmpty()) {
+                columns.add(column);
+                try {
+                    methods.add(getMethod(key));
+//                columnClasses[column.length() - 1] = getMethod(key).getReturnType();
+                } catch (NoSuchMethodException ex) {
+                    Logger.getLogger(HibernateRowTableModel.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
         setDataAndColumnNames(data, columns);

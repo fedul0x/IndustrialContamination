@@ -53,7 +53,7 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
         setCurrentOperator(null);
-          ContaminationCompositionInputPanel ccip = new ContaminationCompositionInputPanel();
+          ContaminationCompositionInputPanel2 ccip = new ContaminationCompositionInputPanel2();
        this.add(ccip, "ccip");
         ((CardLayout) getContentPane().getLayout()).show(this.getContentPane(), "ccip");
         this.revalidate();
@@ -85,6 +85,7 @@ public class MainFrame extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(500, 500));
         getContentPane().setLayout(new java.awt.CardLayout());
         getContentPane().add(jPanel1, "card2");
 
@@ -177,7 +178,9 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jmenuDatabaseSettingsActionPerformed
 
     private void jitemFKKOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jitemFKKOActionPerformed
-        HibernateRowTableModel<ContaminationByFederalClassification> hrtm = new HibernateRowTableModel(ContaminationByFederalClassification.class);
+//        String fields[] = {"code", "description", "dangerousCode"};
+        String fields[] = {"Код", "Описание", "Класс опасности"};
+        HibernateRowTableModel<ContaminationByFederalClassification> hrtm = new HibernateRowTableModel(ContaminationByFederalClassification.class, fields);
         TablePanel tp = new TablePanel(hrtm, false);
         this.add(tp, "tp");
         ((CardLayout) getContentPane().getLayout()).next(this.getContentPane());
@@ -205,7 +208,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         this.revalidate();
         
-        ContaminationCompositionInputPanel ccip = new ContaminationCompositionInputPanel();
+        ContaminationCompositionInputPanel2 ccip = new ContaminationCompositionInputPanel2();
        this.add(ccip, "ccip");
         ((CardLayout) getContentPane().getLayout()).show(this.getContentPane(), "ccip");
         this.revalidate();

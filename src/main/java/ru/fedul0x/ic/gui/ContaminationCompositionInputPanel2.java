@@ -29,21 +29,18 @@ import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.text.NumberFormatter;
 import ru.fedul0x.ic.dataaccess.DataSourceHibernate;
 import ru.fedul0x.ic.dataaccess.dataobject.ContaminationComposition;
-import ru.fedul0x.ic.dataaccess.dataobject.DataSheetContaminationComposition;
 import ru.fedul0x.ic.gui.component.model.AutoCompletion;
 import ru.fedul0x.ic.gui.component.model.HibernatedComboBoxModel;
-import ru.fedul0x.ic.view.component.model.HibernateRowTableModel;
 
 /**
  *
  * @author Ivashin Alexey <ivashin.alexei@gmail.com>
  */
-public class ContaminationCompositionInputPanel extends javax.swing.JPanel implements PropertyChangeListener {
+public class ContaminationCompositionInputPanel2 extends javax.swing.JPanel implements PropertyChangeListener {
 
     private ContaminationComposition contaminationComposition;
     private List<ContaminationComposition> allContaminations;
@@ -102,14 +99,14 @@ public class ContaminationCompositionInputPanel extends javax.swing.JPanel imple
 
     }
 
-    public ContaminationCompositionInputPanel() {
+    public ContaminationCompositionInputPanel2() {
         initComponents();
         contaminationComposition = null;
         balance = 100;
         updateComboBox();
     }
 
-    public ContaminationCompositionInputPanel(ContaminationComposition contaminationComposition) {
+    public ContaminationCompositionInputPanel2(ContaminationComposition contaminationComposition) {
         initComponents();
         this.contaminationComposition = contaminationComposition;
     }
@@ -272,3 +269,43 @@ public class ContaminationCompositionInputPanel extends javax.swing.JPanel imple
 
 }
 
+class CurrencyCellEditor extends DefaultCellEditor {
+
+    private NumberFormat numberFormat;
+
+    public CurrencyCellEditor(final JFormattedTextField tf, NumberFormat nf) {
+        super(tf);
+        numberFormat = nf;
+        tf.setFocusLostBehavior(JFormattedTextField.COMMIT);
+        tf.setHorizontalAlignment(SwingConstants.RIGHT);
+        tf.setBorder(null);
+
+        delegate = new EditorDelegate() {
+
+            @Override
+            public void setValue(Object param) {
+                Double _value = (Double) param;
+                if (_value == null) {
+                    tf.setValue(numberFormat.format(0.0));
+                } else {
+                    double _d = _value.doubleValue();
+                    String _format = numberFormat.format(_d);
+                    tf.setValue(_format);
+                }
+            }
+
+            public Object getCellEditorValue() {
+                try {
+                    String _field = tf.getText();
+                    Number _number = numberFormat.parse(_field);
+                    double _parsed = _number.doubleValue();
+                    Double d = new Double(_parsed);
+                    return d;
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                    return new Double(0.0);
+                }
+            }
+        };
+    }
+}

@@ -60,9 +60,6 @@ public class HibernatedComboBoxModel extends AbstractListModel implements ComboB
     @Override
     public void setSelectedItem(Object o) {
         for (ContaminationComposition i : items) {
-            System.err.println(i);
-            System.err.println(o);
-            System.err.println("sdsds");
             if (i.getName() == ((String) o)) {
                 selectedItem = i;
                 System.out.println(selectedItem);

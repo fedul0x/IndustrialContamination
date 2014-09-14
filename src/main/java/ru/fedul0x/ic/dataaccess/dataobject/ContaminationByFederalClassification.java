@@ -65,7 +65,7 @@ public class ContaminationByFederalClassification extends DataEntity {
         this.id = id;
     }
 
-    @Column(unique = true, nullable = false)
+    @TitledColumn(title = "Код", unique = true, nullable = false)
     public Long getCode() {
         return code;
     }
@@ -74,7 +74,7 @@ public class ContaminationByFederalClassification extends DataEntity {
         this.code = code;
     }
 
-    @TitledColumn(name = "defs", length = 1000, nullable = false)
+    @TitledColumn(title = "Описание", length = 1000, nullable = false)
     public String getDescription() {
         return description;
     }
@@ -83,7 +83,7 @@ public class ContaminationByFederalClassification extends DataEntity {
         this.description = description;
     }
 
-    @Column(name = "dangerous_code", nullable = false)
+    @TitledColumn(title = "Класс опасности", name = "dangerous_code", nullable = false)
     public Byte getDangerousCode() {
         return dangerousCode;
     }

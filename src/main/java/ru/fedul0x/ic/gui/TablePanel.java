@@ -66,6 +66,7 @@ public class TablePanel extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        JtblAnyData.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         JtblAnyData.setEnabled(false);
         jScrollPane1.setViewportView(JtblAnyData);
 

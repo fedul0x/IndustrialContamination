@@ -222,7 +222,7 @@ public class DataSheetInputPanel extends javax.swing.JPanel {
 
     private void jbtnContaminationCompositionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnContaminationCompositionActionPerformed
         //next dialog 
-        ContaminationCompositionInputPanel ccip = new ContaminationCompositionInputPanel();
+        ContaminationCompositionInputPanel2 ccip = new ContaminationCompositionInputPanel2();
         getParent().add(ccip, "ccip");
         ((CardLayout) getParent().getLayout()).next(getParent());
     }//GEN-LAST:event_jbtnContaminationCompositionActionPerformed
